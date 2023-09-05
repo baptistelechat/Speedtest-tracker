@@ -1,0 +1,9 @@
+version: "3"
+services:
+  app:
+    build: .
+    restart: always # Redémarre toujours le conteneur en cas d'échec
+    # environment:
+      # - APP_MODE=PRODUCTION # Définit l'environnement en mode production
+    volumes:
+      - ./results.json:/app/results.json # Montre le fichier JSON en dehors du conteneur
