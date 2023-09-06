@@ -7,6 +7,7 @@ import { ISpeedTestData } from "./data/interface/ISpeedTestData";
 import { getSpeedTestData } from "./data/utils/getSpeedTestData";
 import { ISpeedTestResult } from "./data/interface/ISpeedTestResult";
 import { speedTestResultLogger } from "./data/utils/speedTestResultLogger";
+import { ensureDataDirectoryExists } from "./data/utils/ensureDataDirectoryExists";
 
 dotenv.config();
 const APP_MODE = process.env.APP_MODE as string;
@@ -14,6 +15,9 @@ const WINDOWS_SPEEDTEST_CLI_PATH = process.env.WINDOWS_SPEEDTEST_CLI_PATH;
 
 const launchSpeedTest = async () => {
   const timestamp = getCurrentTimestamp();
+
+  // S'assurer que le répertoire data existe
+  await ensureDataDirectoryExists();
 
   let speedTestCommand = "speedtest --accept-license --accept-gdpr -f json";
   if (APP_MODE.includes("WIN")) {
@@ -27,34 +31,38 @@ const launchSpeedTest = async () => {
       encoding: "utf-8",
     });
 
-    const speedtestResult: ISpeedTestResult = JSON.parse(speedTestOutput);
+    const speedTestResult: ISpeedTestResult = JSON.parse(speedTestOutput);
 
-    speedTestResultLogger(speedtestResult);
+    speedTestResultLogger(speedTestResult);
 
     console.log("🏁 Speed test finish");
 
     // Crée un objet pour stocker les résultats
-    const speedtestData: ISpeedTestData = getSpeedTestData(
+    const speedTestData: ISpeedTestData = getSpeedTestData(
       timestamp,
-      speedtestResult
+      speedTestResult
     );
+
+    // Génère le chemin complet vers le fichier de données
+    const filename = getCurrentTimestamp(true, true);
+    const dataFilePath = `./data/${filename}.json`;
 
     // Charge les données existantes depuis le fichier JSON
     let jsonData: ISpeedTestData[] = [];
     try {
-      const fileData = await fs.readFile("./results.json", "utf8");
+      const fileData = await fs.readFile(dataFilePath, "utf8");
       jsonData = JSON.parse(fileData);
     } catch (error) {
       // Le fichier n'existe probablement pas, alors on le crée
-      await fs.writeFile("./results.json", JSON.stringify([], null, 2));
+      await fs.writeFile(dataFilePath, JSON.stringify([], null, 2));
     }
 
     // Ajoute les nouvelles données au tableau
-    jsonData.push(speedtestData);
+    jsonData.push(speedTestData);
 
     // Écrit les données dans le fichier JSON
     console.log("📝 Write data");
-    await fs.writeFile("./results.json", JSON.stringify(jsonData, null, 2));
+    await fs.writeFile(dataFilePath, JSON.stringify(jsonData, null, 2));
     console.log("");
   } catch (err: any) {
     console.error("Erreur lors du test de vitesse :", err.message);

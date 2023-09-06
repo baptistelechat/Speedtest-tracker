@@ -8,6 +8,6 @@ services:
     #   - APP_MODE = UNIX_DEVELOPMENT # Définit l'environnement en mode production
     #   - WINDOWS_SPEEDTEST_CLI_PATH = -
     container_name: speedtest-tracker-script
-    # volumes:
-    #   - ./script/results.json:/app/results.json # Montre le fichier JSON en dehors du conteneur
+    volumes:
+      - ./script/data:/app/data # Montre tout le répertoire "script" en dehors du conteneur
     restart: always # Redémarre toujours le conteneur en cas d'échec
