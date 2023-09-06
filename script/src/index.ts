@@ -4,9 +4,9 @@ import fs from "fs/promises";
 import dotenv from "dotenv";
 import { getCurrentTimestamp } from "./data/utils/getCurrentTimestamp";
 import { ISpeedTestData } from "./data/interface/ISpeedTestData";
-import { getSpeedTestData } from "./data/utils/getSpeedtestData";
+import { getSpeedTestData } from "./data/utils/getSpeedTestData";
 import { ISpeedTestResult } from "./data/interface/ISpeedTestResult";
-import { speedTestResultLogger } from "./data/utils/speedtestResultLogger";
+import { speedTestResultLogger } from "./data/utils/speedTestResultLogger";
 
 dotenv.config();
 const APP_MODE = process.env.APP_MODE as string;
@@ -42,11 +42,11 @@ const launchSpeedTest = async () => {
     // Charge les données existantes depuis le fichier JSON
     let jsonData: ISpeedTestData[] = [];
     try {
-      const fileData = await fs.readFile("../script/results.json", "utf8");
+      const fileData = await fs.readFile("./results.json", "utf8");
       jsonData = JSON.parse(fileData);
     } catch (error) {
       // Le fichier n'existe probablement pas, alors on le crée
-      await fs.writeFile("../script/results.json", JSON.stringify([], null, 2));
+      await fs.writeFile("./results.json", JSON.stringify([], null, 2));
     }
 
     // Ajoute les nouvelles données au tableau
@@ -54,10 +54,7 @@ const launchSpeedTest = async () => {
 
     // Écrit les données dans le fichier JSON
     console.log("📝 Write data");
-    await fs.writeFile(
-      "../script/results.json",
-      JSON.stringify(jsonData, null, 2)
-    );
+    await fs.writeFile("./results.json", JSON.stringify(jsonData, null, 2));
     console.log("");
   } catch (err: any) {
     console.error("Erreur lors du test de vitesse :", err.message);
