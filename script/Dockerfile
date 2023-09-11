@@ -27,6 +27,6 @@ RUN pnpm install
 COPY . ./
 
 # Exécute le script au démarrage
-CMD ["pnpm", "start"]
+CMD ["pnpm", "dev"]
 # CMD ["speedtest", "--accept-license", "--accept-gdpr", "-f", "json"]
 # CMD ["tail", "-f", "/dev/null"]

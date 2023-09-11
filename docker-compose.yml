@@ -1,13 +1,23 @@
 version: "3.8"
 services:
-  script:
+  speedtest_tracker_script:
     build:
       context: ./script
       dockerfile: Dockerfile
     # environment:
     #   - APP_MODE = UNIX_DEVELOPMENT # Définit l'environnement en mode production
     #   - WINDOWS_SPEEDTEST_CLI_PATH = -
-    container_name: speedtest-tracker-script
+    container_name: speedtest_tracker_script
     volumes:
       - ./script/data:/app/data # Montre tout le répertoire "script" en dehors du conteneur
     restart: always # Redémarre toujours le conteneur en cas d'échec
+  speedtest_tracker_api:
+    build: ./api
+    container_name: speedtest_tracker_api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - speedtest_tracker_script
+    volumes:
+      - ./script/data:/app/data  # Montre le dossier data à l'intérieur du conteneur
+    restart: always
