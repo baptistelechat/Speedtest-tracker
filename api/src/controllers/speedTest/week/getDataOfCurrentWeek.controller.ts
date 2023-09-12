@@ -5,6 +5,7 @@ import { getWeekNumber } from "../../../data/utils/getWeekNumber";
 
 const APP_MODE = process.env.APP_MODE;
 
+// GET data of current week
 export const getDataOfCurrentWeek = (req: Request, res: Response) => {
   try {
     const today = new Date();
@@ -13,12 +14,14 @@ export const getDataOfCurrentWeek = (req: Request, res: Response) => {
     const currentYear = today.getFullYear();
 
     // Calcul de la date du début de la semaine (lundi)
-    const startDate = new Date(currentYear, 0, (weekNumber - 1) * 7 + 1);
-    startDate.setDate(startDate.getDate() + (1 - startDate.getDay()) + 1);
+    const startDate = new Date(currentYear, 0, 1); // Commence le 1er janvier de l'année en cours
+    startDate.setDate(
+      startDate.getDate() + ((weekNumber - 1) * 7 + 1 - startDate.getDay()) + 1
+    );
 
     // Calcul de la date de fin de la semaine (dimanche)
-    const endDate = new Date(currentYear, 0, (weekNumber - 1) * 7 + 7);
-    endDate.setDate(endDate.getDate() + (7 - endDate.getDay()) + 1);
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 6);
 
     const data = [];
 

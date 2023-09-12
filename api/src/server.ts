@@ -2,7 +2,9 @@ import express, { Express, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import chalk from "chalk";
 import cors from "cors";
-import speedTestRouter from "./routes/speedTest.routes";
+import speedTestDayRouter from "./routes/speedTest/speedTest.day.routes";
+import speedTestWeekRouter from "./routes/speedTest/speedTest.week.routes";
+import speedTestMonthRouter from "./routes/speedTest/speedTest.month.routes";
 
 dotenv.config({ path: "../.env" });
 
@@ -50,7 +52,13 @@ app.get("/", (req: Request, res: Response) => {
   res.json({ msg: "🌍 Welcome to the app !" });
 });
 
-app.use("/api/speedTest", speedTestRouter);
+app.get("/api/speedTest", (req: Request, res: Response) => {
+  res.json({ msg: "🚀 Welcome speedTest data !" });
+});
+
+app.use("/api/speedTest/day", speedTestDayRouter);
+app.use("/api/speedTest/week", speedTestWeekRouter);
+app.use("/api/speedTest/month", speedTestMonthRouter);
 
 // Listen requests
 app.listen(PORT, () => {

@@ -4,25 +4,19 @@ import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
 const APP_MODE = process.env.APP_MODE;
 
-// GET data of a specific week
-export const getDataOfWeek = async (req: Request, res: Response) => {
+// GET data of current month
+export const getDataOfCurrentMonth = async (req: Request, res: Response) => {
   try {
-    const { weekNumber } = req.params;
-
     const today = new Date();
+    const monthNumber = today.getMonth() + 1;
+
     const currentYear = today.getFullYear();
 
-    // Calcul de la date du début de la semaine (lundi)
-    const startDate = new Date(currentYear, 0, 1); // Commence le 1er janvier de l'année en cours
-    startDate.setDate(
-      startDate.getDate() +
-        ((parseInt(weekNumber) - 1) * 7 + 1 - startDate.getDay()) +
-        1
-    );
+    // Calcul de la date du début du mois
+    const startDate = new Date(currentYear, monthNumber - 1, 2);
 
-    // Calcul de la date de fin de la semaine (dimanche)
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 6);
+    // Calcul de la date de fin du mois
+    const endDate = new Date(currentYear, monthNumber, 1);
 
     const data = [];
 
@@ -34,7 +28,7 @@ export const getDataOfWeek = async (req: Request, res: Response) => {
       const formattedDate = date
         .toISOString()
         .split("T")[0]
-        .replaceAll("-", ""); // Format AAAAMMJJ
+        .replaceAll("-", "");
       const dataPath = APP_MODE?.includes("UNIX")
         ? `./data/${formattedDate}.json`
         : `../script/data/${formattedDate}.json`;
