@@ -4,11 +4,11 @@ import chalk from "chalk";
 import cors from "cors";
 import fs from "fs";
 
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 // Express App
 const app: Express = express();
-const port = process.env.PORT;
+const port = process.env.API_PORT;
 
 // Middleware
 app.use(

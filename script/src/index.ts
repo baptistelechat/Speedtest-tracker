@@ -9,7 +9,8 @@ import { ISpeedTestResult } from "./data/interface/ISpeedTestResult";
 import { speedTestResultLogger } from "./data/utils/speedTestResultLogger";
 import { ensureDataDirectoryExists } from "./data/utils/ensureDataDirectoryExists";
 
-dotenv.config();
+dotenv.config({ path: "../.env" });
+
 const APP_MODE = process.env.APP_MODE as string;
 const WINDOWS_SPEEDTEST_CLI_PATH = process.env.WINDOWS_SPEEDTEST_CLI_PATH;
 

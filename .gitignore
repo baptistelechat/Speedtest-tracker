@@ -1,6 +1,9 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,node
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,dotenv,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,dotenv,node
+
+### dotenv ###
+.env
 
 ### Node ###
 # Logs
@@ -78,7 +81,6 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -187,7 +189,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,dotenv,node
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-/data/
+/script/data/
