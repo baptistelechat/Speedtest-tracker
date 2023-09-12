@@ -31,7 +31,7 @@ export const getDataOfToday = async (req: Request, res: Response) => {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0].replaceAll("-", ""); // Format AAAAMMJJ
     const data =
-      process.env.APP_MODE === "UNIX_DEVELOPMENT"
+      process.env.APP_MODE?.includes("UNIX")
         ? fs.readFileSync(`./data/${formattedDate}.json`, "utf-8")
         : fs.readFileSync(`../script/data/${formattedDate}.json`, "utf-8");
     res.json(JSON.parse(data));
@@ -52,7 +52,7 @@ export const getDataOfYesterday = async (req: Request, res: Response) => {
       .split("T")[0]
       .replaceAll("-", ""); // Format AAAAMMJJ
     const data =
-      process.env.APP_MODE === "UNIX_DEVELOPMENT"
+      process.env.APP_MODE?.includes("UNIX")
         ? fs.readFileSync(`./data/${formattedDate}.json`, "utf-8")
         : fs.readFileSync(`../script/data/${formattedDate}.json`, "utf-8");
     res.json(JSON.parse(data));
