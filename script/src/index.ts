@@ -2,12 +2,12 @@ import { execSync } from "child_process";
 import cron from "node-cron";
 import fs from "fs/promises";
 import dotenv from "dotenv";
-import { getCurrentTimestamp } from "./data/utils/getCurrentTimestamp";
+import { getCurrentTimestamp } from "./utils/getCurrentTimestamp";
 import { ISpeedTestData } from "./data/interface/ISpeedTestData";
-import { getSpeedTestData } from "./data/utils/getSpeedTestData";
+import { getSpeedTestData } from "./utils/getSpeedTestData";
 import { ISpeedTestResult } from "./data/interface/ISpeedTestResult";
-import { speedTestResultLogger } from "./data/utils/speedTestResultLogger";
-import { ensureDataDirectoryExists } from "./data/utils/ensureDataDirectoryExists";
+import { speedTestResultLogger } from "./utils/speedTestResultLogger";
+import { ensureDataDirectoryExists } from "./utils/ensureDataDirectoryExists";
 
 dotenv.config({ path: "../.env" });
 

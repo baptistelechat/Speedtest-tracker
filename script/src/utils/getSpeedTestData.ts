@@ -1,5 +1,5 @@
-import { ISpeedTestData } from "../interface/ISpeedTestData";
-import { ISpeedTestResult } from "../interface/ISpeedTestResult";
+import { ISpeedTestData } from "../data/interface/ISpeedTestData";
+import { ISpeedTestResult } from "../data/interface/ISpeedTestResult";
 import { convertBytesToMbps } from "./convertBytesToMbps";
 
 export const getSpeedTestData = (

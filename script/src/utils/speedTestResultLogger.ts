@@ -1,4 +1,4 @@
-import { ISpeedTestResult } from "../interface/ISpeedTestResult";
+import { ISpeedTestResult } from "../data/interface/ISpeedTestResult";
 import { convertBytesToMbps } from "./convertBytesToMbps";
 
 export const speedTestResultLogger = (speedTestResult: ISpeedTestResult) => {

@@ -2,14 +2,13 @@ import express, { Express, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import chalk from "chalk";
 import cors from "cors";
-import fs from "fs";
+import speedTestRouter from "./routes/speedTest.routes";
 
 dotenv.config({ path: "../.env" });
 
 // Express App
 const app: Express = express();
 const PORT = process.env.API_PORT;
-const APP_MODE = process.env.APP_MODE;
 
 // Middleware
 app.use(
@@ -51,20 +50,7 @@ app.get("/", (req: Request, res: Response) => {
   res.json({ msg: "🌍 Welcome to the app !" });
 });
 
-// Endpoint pour récupérer les données
-app.get("/data/:filename", (req, res) => {
-  try {
-    const { filename } = req.params;
-    const data = APP_MODE?.includes("UNIX")
-      ? fs.readFileSync(`./data/${filename}.json`, "utf-8")
-      : fs.readFileSync(`../script/data/${filename}.json`, "utf-8");
-    res.json(JSON.parse(data));
-  } catch (error: any) {
-    res.status(500).json({
-      error: `Erreur lors de la récupération des données - ${error.message}`,
-    });
-  }
-});
+app.use("/api/speedTest", speedTestRouter);
 
 // Listen requests
 app.listen(PORT, () => {
