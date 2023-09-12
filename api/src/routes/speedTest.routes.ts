@@ -4,6 +4,7 @@ import {
   getDataOfSpecificDate,
   getDataOfToday,
   getDataOfYesterday,
+  getLastDataOfToday,
 } from "../controllers/speedTest.controllers";
 
 const speedTestRouter = express.Router();
@@ -12,9 +13,11 @@ const speedTestRouter = express.Router();
 speedTestRouter.get("/", defaultRoute);
 // GET data of today
 speedTestRouter.get("/today", getDataOfToday);
+// GET last data of today
+speedTestRouter.get("/last", getLastDataOfToday);
 // GET all // GET data of yesterday
 speedTestRouter.get("/yesterday", getDataOfYesterday);
-// // GET all demandeAbandonnee
+// GET data of a specific date
 speedTestRouter.get("/:filename", getDataOfSpecificDate);
 
 export default speedTestRouter;
