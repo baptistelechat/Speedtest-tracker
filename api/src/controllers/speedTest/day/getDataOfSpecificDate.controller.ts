@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import fs from "fs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-const APP_MODE = process.env.APP_MODE;
-
 // GET data of a specific date
 export const getDataOfSpecificDate = async (req: Request, res: Response) => {
+  const APP_MODE = process.env.APP_MODE;
+
   try {
     const { filename } = req.params;
     const fileData = APP_MODE?.includes("UNIX")

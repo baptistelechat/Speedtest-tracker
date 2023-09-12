@@ -3,10 +3,10 @@ import fs from "fs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 import { getWeekNumber } from "../../../data/utils/getWeekNumber";
 
-const APP_MODE = process.env.APP_MODE;
-
 // GET data of current week
 export const getDataOfCurrentWeek = (req: Request, res: Response) => {
+  const APP_MODE = process.env.APP_MODE;
+
   try {
     const today = new Date();
     const weekNumber = getWeekNumber(today);
@@ -16,7 +16,7 @@ export const getDataOfCurrentWeek = (req: Request, res: Response) => {
     // Calcul de la date du début de la semaine (lundi)
     const startDate = new Date(currentYear, 0, 1); // Commence le 1er janvier de l'année en cours
     startDate.setDate(
-      startDate.getDate() + ((weekNumber - 1) * 7 + 1 - startDate.getDay()) + 1
+      startDate.getDate() + ((weekNumber - 1) * 7 + 1 - startDate.getDay())
     );
 
     // Calcul de la date de fin de la semaine (dimanche)
@@ -37,6 +37,8 @@ export const getDataOfCurrentWeek = (req: Request, res: Response) => {
       const dataPath = APP_MODE?.includes("UNIX")
         ? `./data/${formattedDate}.json`
         : `../script/data/${formattedDate}.json`;
+
+      console.log(APP_MODE);
 
       try {
         const fileData = fs.readFileSync(dataPath, "utf-8");

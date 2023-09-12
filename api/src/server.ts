@@ -10,6 +10,7 @@ dotenv.config({ path: "../.env" });
 
 // Express App
 const app: Express = express();
+const APP_MODE = process.env.APP_MODE;
 const PORT = process.env.API_PORT;
 
 // Middleware
@@ -62,6 +63,7 @@ app.use("/api/speedTest/month", speedTestMonthRouter);
 
 // Listen requests
 app.listen(PORT, () => {
+  console.log(`🌍 ${APP_MODE}`);
   console.log(
     chalk.yellow(`⚡️[server]: Server is running at http://localhost:${PORT}`)
   );

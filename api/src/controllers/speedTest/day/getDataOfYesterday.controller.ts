@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import fs from "fs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-const APP_MODE = process.env.APP_MODE;
-
 // GET data of yesterday
 export const getDataOfYesterday = async (req: Request, res: Response) => {
+  const APP_MODE = process.env.APP_MODE;
+
   try {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);

@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import fs from "fs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-const APP_MODE = process.env.APP_MODE;
-
 // GET data of current month
 export const getDataOfCurrentMonth = async (req: Request, res: Response) => {
+  const APP_MODE = process.env.APP_MODE;
+
   try {
     const today = new Date();
     const monthNumber = today.getMonth() + 1;
@@ -13,10 +13,10 @@ export const getDataOfCurrentMonth = async (req: Request, res: Response) => {
     const currentYear = today.getFullYear();
 
     // Calcul de la date du début du mois
-    const startDate = new Date(currentYear, monthNumber - 1, 2);
+    const startDate = new Date(currentYear, monthNumber - 1, 1);
 
     // Calcul de la date de fin du mois
-    const endDate = new Date(currentYear, monthNumber, 1);
+    const endDate = new Date(currentYear, monthNumber, 0);
 
     const data = [];
 

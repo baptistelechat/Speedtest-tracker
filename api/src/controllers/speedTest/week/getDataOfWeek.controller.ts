@@ -2,10 +2,9 @@ import { Request, Response } from "express";
 import fs from "fs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-const APP_MODE = process.env.APP_MODE;
-
 // GET data of a specific week
 export const getDataOfWeek = async (req: Request, res: Response) => {
+  const APP_MODE = process.env.APP_MODE;
   try {
     const { weekNumber } = req.params;
 
@@ -16,8 +15,7 @@ export const getDataOfWeek = async (req: Request, res: Response) => {
     const startDate = new Date(currentYear, 0, 1); // Commence le 1er janvier de l'année en cours
     startDate.setDate(
       startDate.getDate() +
-        ((parseInt(weekNumber) - 1) * 7 + 1 - startDate.getDay()) +
-        1
+        ((parseInt(weekNumber) - 1) * 7 + 1 - startDate.getDay())
     );
 
     // Calcul de la date de fin de la semaine (dimanche)

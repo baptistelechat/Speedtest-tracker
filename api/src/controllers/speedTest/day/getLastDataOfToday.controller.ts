@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import fs from "fs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-const APP_MODE = process.env.APP_MODE;
-
 // GET last data of today
 export const getLastDataOfToday = async (req: Request, res: Response) => {
+  const APP_MODE = process.env.APP_MODE;
+  
   try {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0].replaceAll("-", ""); // Format AAAAMMJJ
