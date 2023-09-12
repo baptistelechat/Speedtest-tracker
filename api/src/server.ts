@@ -8,7 +8,8 @@ dotenv.config({ path: "../.env" });
 
 // Express App
 const app: Express = express();
-const port = process.env.API_PORT;
+const PORT = process.env.API_PORT;
+const APP_MODE = process.env.APP_MODE;
 
 // Middleware
 app.use(
@@ -54,10 +55,9 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/data/:filename", (req, res) => {
   try {
     const { filename } = req.params;
-    const data =
-      process.env.APP_MODE === "UNIX_DEVELOPMENT"
-        ? fs.readFileSync(`./data/${filename}.json`, "utf-8")
-        : fs.readFileSync(`../script/data/${filename}.json`, "utf-8");
+    const data = APP_MODE?.includes("UNIX_DEVELOPMENT")
+      ? fs.readFileSync(`./data/${filename}.json`, "utf-8")
+      : fs.readFileSync(`../script/data/${filename}.json`, "utf-8");
     res.json(JSON.parse(data));
   } catch (error: any) {
     res.status(500).json({
@@ -67,8 +67,8 @@ app.get("/data/:filename", (req, res) => {
 });
 
 // Listen requests
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(
-    chalk.yellow(`⚡️[server]: Server is running at http://localhost:${port}`)
+    chalk.yellow(`⚡️[server]: Server is running at http://localhost:${PORT}`)
   );
 });
