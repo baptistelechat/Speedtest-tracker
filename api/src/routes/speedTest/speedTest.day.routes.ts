@@ -16,6 +16,9 @@ import { getMinDataOfYesterday } from "../../controllers/speedTest/day/min/getMi
 import { getQ1DataOfDate } from "../../controllers/speedTest/day/q1/getQ1DataOfDate.controller";
 import { getQ1DataOfToday } from "../../controllers/speedTest/day/q1/getQ1DataOfToday.controller";
 import { getQ1DataOfYesterday } from "../../controllers/speedTest/day/q1/getQ1DataOfYesterday.controller";
+import { getQ3DataOfDate } from "../../controllers/speedTest/day/q3/getQ3DataOfDate.controller";
+import { getQ3DataOfToday } from "../../controllers/speedTest/day/q3/getQ3DataOfToday.controller";
+import { getQ3DataOfYesterday } from "../../controllers/speedTest/day/q3/getQ3DataOfYesterday.controller";
 
 const speedTestDayRouter = express.Router();
 
@@ -51,5 +54,11 @@ speedTestDayRouter.get("/today/q1", getQ1DataOfToday);
 speedTestDayRouter.get("/yesterday/q1", getQ1DataOfYesterday);
 // GET Q1 data of a specific date
 speedTestDayRouter.get("/:filename/q1", getQ1DataOfDate);
+// GET Q3 data of today
+speedTestDayRouter.get("/today/q3", getQ3DataOfToday);
+// GET Q3 data of yesterday
+speedTestDayRouter.get("/yesterday/q3", getQ3DataOfYesterday);
+// GET Q3 data of a specific date
+speedTestDayRouter.get("/:filename/q3", getQ3DataOfDate);
 
 export default speedTestDayRouter;

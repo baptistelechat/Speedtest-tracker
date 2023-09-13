@@ -15,6 +15,9 @@ import { getMinDataOfWeek } from "../../controllers/speedTest/week/min/getMinDat
 import { getQ1DataOfCurrentWeek } from "../../controllers/speedTest/week/q1/getQ1DataOfCurrentWeek.controller";
 import { getQ1DataOfPreviousWeek } from "../../controllers/speedTest/week/q1/getQ1DataOfPreviousWeek.controller";
 import { getQ1DataOfWeek } from "../../controllers/speedTest/week/q1/getQ1DataOfWeek.controller";
+import { getQ3DataOfCurrentWeek } from "../../controllers/speedTest/week/q3/getQ3DataOfCurrentWeek.controller";
+import { getQ3DataOfPreviousWeek } from "../../controllers/speedTest/week/q3/getQ3DataOfPreviousWeek.controller";
+import { getQ3DataOfWeek } from "../../controllers/speedTest/week/q3/getQ3DataOfWeek.controller";
 
 const speedTestWeekRouter = express.Router();
 
@@ -42,11 +45,17 @@ speedTestWeekRouter.get("/current/min", getMinDataOfCurrentWeek);
 speedTestWeekRouter.get("/previous/min", getMinDataOfPreviousWeek);
 // GET min data for a specific week
 speedTestWeekRouter.get("/:weekNumber/min", getMinDataOfWeek);
-// GET Q1 data of current week
+// GET Q3 data of current week
 speedTestWeekRouter.get("/current/q1", getQ1DataOfCurrentWeek);
-// GET Q1 data of previous week
+// GET Q3 data of previous week
 speedTestWeekRouter.get("/previous/q1", getQ1DataOfPreviousWeek);
-// GET Q1 data for a specific week
+// GET Q3 data for a specific week
 speedTestWeekRouter.get("/:weekNumber/q1", getQ1DataOfWeek);
+// GET Q3 data of current week
+speedTestWeekRouter.get("/current/q3", getQ3DataOfCurrentWeek);
+// GET Q3 data of previous week
+speedTestWeekRouter.get("/previous/q3", getQ3DataOfPreviousWeek);
+// GET Q3 data for a specific week
+speedTestWeekRouter.get("/:weekNumber/q3", getQ3DataOfWeek);
 
 export default speedTestWeekRouter;
