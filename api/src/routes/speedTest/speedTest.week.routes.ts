@@ -9,6 +9,9 @@ import { getDataOfWeek } from "../../controllers/speedTest/week/base/getDataOfWe
 import { getMaxDataOfCurrentWeek } from "../../controllers/speedTest/week/max/getMaxDataOfCurrentWeek.controller";
 import { getMaxDataOfPreviousWeek } from "../../controllers/speedTest/week/max/getMaxDataOfPreviousWeek.controller";
 import { getMaxDataOfWeek } from "../../controllers/speedTest/week/max/getMaxDataOfWeek.controller";
+import { getMinDataOfCurrentWeek } from "../../controllers/speedTest/week/min/getMinDataOfCurrentWeek.controller";
+import { getMinDataOfPreviousWeek } from "../../controllers/speedTest/week/min/getMinDataOfPreviousWeek.controller";
+import { getMinDataOfWeek } from "../../controllers/speedTest/week/min/getMinDataOfWeek.controller";
 
 const speedTestWeekRouter = express.Router();
 
@@ -30,5 +33,11 @@ speedTestWeekRouter.get("/current/max", getMaxDataOfCurrentWeek);
 speedTestWeekRouter.get("/previous/max", getMaxDataOfPreviousWeek);
 // GET max data for a specific week
 speedTestWeekRouter.get("/:weekNumber/max", getMaxDataOfWeek);
+// GET min data of current week
+speedTestWeekRouter.get("/current/min", getMinDataOfCurrentWeek);
+// GET min data of previous week
+speedTestWeekRouter.get("/previous/min", getMinDataOfPreviousWeek);
+// GET min data for a specific week
+speedTestWeekRouter.get("/:weekNumber/min", getMinDataOfWeek);
 
 export default speedTestWeekRouter;

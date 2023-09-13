@@ -9,6 +9,9 @@ import { getDataOfPreviousMonth } from "../../controllers/speedTest/month/base/g
 import { getMaxDataOfCurrentMonth } from "../../controllers/speedTest/month/max/getMaxDataOfCurrentMonth.controller";
 import { getMaxDataOfMonth } from "../../controllers/speedTest/month/max/getMaxDataOfMonth.controller";
 import { getMaxDataOfPreviousMonth } from "../../controllers/speedTest/month/max/getMaxDataOfPreviousMonth.controller";
+import { getMinDataOfCurrentMonth } from "../../controllers/speedTest/month/min/getMinDataOfCurrentMonth.controller";
+import { getMinDataOfMonth } from "../../controllers/speedTest/month/min/getMinDataOfMonth.controller";
+import { getMinDataOfPreviousMonth } from "../../controllers/speedTest/month/min/getMinDataOfPreviousMonth.controller";
 
 const speedTestMonthRouter = express.Router();
 
@@ -30,5 +33,11 @@ speedTestMonthRouter.get("/current/max", getMaxDataOfCurrentMonth);
 speedTestMonthRouter.get("/previous/max", getMaxDataOfPreviousMonth);
 // GET max data for a specific month
 speedTestMonthRouter.get("/:monthNumber/max", getMaxDataOfMonth);
+// GET min data of current month
+speedTestMonthRouter.get("/current/min", getMinDataOfCurrentMonth);
+// GET min data of previous month
+speedTestMonthRouter.get("/previous/min", getMinDataOfPreviousMonth);
+// GET min data for a specific month
+speedTestMonthRouter.get("/:monthNumber/min", getMinDataOfMonth);
 
 export default speedTestMonthRouter;
