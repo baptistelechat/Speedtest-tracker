@@ -1,38 +1,30 @@
 import { Request, Response } from "express";
 import fs from "fs";
+import dayjs from "dayjs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
 // GET data of a specific week
 export const getDataOfWeek = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
+
   try {
     const { weekNumber } = req.params;
+    const currentYear = dayjs().year();
 
-    const today = new Date();
-    const currentYear = today.getFullYear();
-
-    // Calcul de la date du début de la semaine (lundi)
-    const startDate = new Date(currentYear, 0, 1); // Commence le 1er janvier de l'année en cours
-    startDate.setDate(
-      startDate.getDate() +
-        ((parseInt(weekNumber) - 1) * 7 + 1 - startDate.getDay())
-    );
-
-    // Calcul de la date de fin de la semaine (dimanche)
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 6);
+    const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
+      .startOf("week")
+      .add(parseInt(weekNumber) - 1, "week")
+      .add(1, "day");
+    const endDate = startDate.endOf("week").add(1, "day");
 
     const data = [];
 
     for (
       let date = startDate;
-      date <= endDate;
-      date.setDate(date.getDate() + 1)
+      date.isBefore(endDate);
+      date = date.add(1, "day")
     ) {
-      const formattedDate = date
-        .toISOString()
-        .split("T")[0]
-        .replaceAll("-", ""); // Format AAAAMMJJ
+      const formattedDate = date.format("YYYYMMDD");
       const dataPath = APP_MODE?.includes("UNIX")
         ? `./data/${formattedDate}.json`
         : `../script/data/${formattedDate}.json`;

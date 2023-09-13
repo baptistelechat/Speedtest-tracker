@@ -7,12 +7,12 @@ import { getLastDataOfToday } from "../../controllers/speedTest/day/getLastDataO
 const speedTestDayRouter = express.Router();
 
 // GET data of today
-speedTestDayRouter.get("/day/today", getDataOfToday);
+speedTestDayRouter.get("/today", getDataOfToday);
 // GET last data of today
-speedTestDayRouter.get("/day/last", getLastDataOfToday);
+speedTestDayRouter.get("/last", getLastDataOfToday);
 // GET all // GET data of yesterday
-speedTestDayRouter.get("/day/yesterday", getDataOfYesterday);
+speedTestDayRouter.get("/yesterday", getDataOfYesterday);
 // GET data of a specific date
-speedTestDayRouter.get("/day/:filename", getDataOfSpecificDate);
+speedTestDayRouter.get("/:filename", getDataOfSpecificDate);
 
 export default speedTestDayRouter;

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import fs from "fs";
+import dayjs from "dayjs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
 // GET data of previous month
@@ -7,28 +8,23 @@ export const getDataOfPreviousMonth = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
-    const today = new Date();
-    const monthNumber = today.getMonth();
+    const currentYear = dayjs().year(); // Année en cours
+    const currentMonth = dayjs().month() + 1; // Mois en cours (de 0 à 11)
 
-    const currentYear = today.getFullYear();
-
-    // Calcul de la date du début du mois
-    const startDate = new Date(currentYear, monthNumber - 1, 1);
-
-    // Calcul de la date de fin du mois
-    const endDate = new Date(currentYear, monthNumber, 0);
+    const startDate = dayjs(
+      `${currentYear}-${currentMonth}-01`,
+      "YYYY-MM-DD"
+    ).subtract(1, "month");
+    const endDate = startDate.endOf("month");
 
     const data = [];
 
     for (
       let date = startDate;
-      date <= endDate;
-      date.setDate(date.getDate() + 1)
+      date.isBefore(endDate);
+      date = date.add(1, "day")
     ) {
-      const formattedDate = date
-        .toISOString()
-        .split("T")[0]
-        .replaceAll("-", "");
+      const formattedDate = date.format("YYYYMMDD");
       const dataPath = APP_MODE?.includes("UNIX")
         ? `./data/${formattedDate}.json`
         : `../script/data/${formattedDate}.json`;

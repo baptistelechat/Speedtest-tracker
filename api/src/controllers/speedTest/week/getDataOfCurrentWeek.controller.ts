@@ -1,44 +1,36 @@
 import { Request, Response } from "express";
 import fs from "fs";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
-import { getWeekNumber } from "../../../data/utils/getWeekNumber";
+
+dayjs.extend(weekOfYear);
 
 // GET data of current week
 export const getDataOfCurrentWeek = (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
-    const today = new Date();
-    const weekNumber = getWeekNumber(today);
+    const currentYear = dayjs().year();
+    const currentWeek = dayjs().week();
 
-    const currentYear = today.getFullYear();
-
-    // Calcul de la date du début de la semaine (lundi)
-    const startDate = new Date(currentYear, 0, 1); // Commence le 1er janvier de l'année en cours
-    startDate.setDate(
-      startDate.getDate() + ((weekNumber - 1) * 7 + 1 - startDate.getDay())
-    );
-
-    // Calcul de la date de fin de la semaine (dimanche)
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 6);
+    const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
+      .startOf("week")
+      .add(currentWeek - 1, "week")
+      .add(1, "day");
+    const endDate = startDate.endOf("week").add(1, "day");
 
     const data = [];
 
     for (
       let date = startDate;
-      date <= endDate;
-      date.setDate(date.getDate() + 1)
+      date.isBefore(endDate);
+      date = date.add(1, "day")
     ) {
-      const formattedDate = date
-        .toISOString()
-        .split("T")[0]
-        .replaceAll("-", ""); // Format AAAAMMJJ
+      const formattedDate = date.format("YYYYMMDD");
       const dataPath = APP_MODE?.includes("UNIX")
         ? `./data/${formattedDate}.json`
         : `../script/data/${formattedDate}.json`;
-
-      console.log(APP_MODE);
 
       try {
         const fileData = fs.readFileSync(dataPath, "utf-8");
