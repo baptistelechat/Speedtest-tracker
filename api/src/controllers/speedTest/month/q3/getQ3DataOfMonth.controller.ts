@@ -35,21 +35,37 @@ export const getQ3DataOfMonth = async (req: Request, res: Response) => {
       }
     }
 
+    const q3Index = (3 * data.length + 1) / 4;
+
     const sortedDownload = data
       .map((entry) => Number(entry.download))
       .sort((a, b) => a - b);
-    const q3Index = Math.floor((3 * sortedDownload.length) / 4);
-    const q3DownloadValue = sortedDownload[q3Index];
+    const q3DownloadValue =
+      q3Index % 1 !== 0
+        ? (sortedDownload[Math.ceil(q3Index - 1)] +
+            sortedDownload[Math.floor(q3Index - 1)]) /
+          2
+        : sortedDownload[q3Index - 1];
 
     const sortedUpload = data
       .map((entry) => Number(entry.upload))
       .sort((a, b) => a - b);
-    const q3UploadValue = sortedUpload[q3Index];
+    const q3UploadValue =
+      q3Index % 1 !== 0
+        ? (sortedUpload[Math.ceil(q3Index - 1)] +
+            sortedUpload[Math.floor(q3Index - 1)]) /
+          2
+        : sortedUpload[q3Index - 1];
 
     const sortedPing = data
       .map((entry) => Number(entry.ping))
       .sort((a, b) => a - b);
-    const q3PingValue = sortedPing[q3Index];
+    const q3PingValue =
+      q3Index % 1 !== 0
+        ? (sortedPing[Math.ceil(q3Index - 1)] +
+            sortedPing[Math.floor(q3Index - 1)]) /
+          2
+        : sortedPing[q3Index - 1];
 
     const stat: ISpeedTestData = {
       id: `q3_month_${monthNumber}`,

@@ -10,7 +10,6 @@ export const getMaxDataOfToday = async (req: Request, res: Response) => {
   try {
     const today = dayjs();
     const formattedDate = today.format("YYYYMMDD");
-    console.log(formattedDate);
 
     const dataPath = APP_MODE?.includes("UNIX")
       ? `./data/${formattedDate}.json`

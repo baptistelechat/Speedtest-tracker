@@ -18,21 +18,37 @@ export const getQ1DataOfYesterday = async (req: Request, res: Response) => {
     const fileData = fs.readFileSync(dataPath, "utf-8");
     const jsonData: ISpeedTestData[] = JSON.parse(fileData);
 
+    const q1Index = (jsonData.length + 1) / 4;
+
     const sortedDownload = jsonData
       .map((entry) => Number(entry.download))
       .sort((a, b) => a - b);
-    const q1Index = Math.floor(sortedDownload.length / 4);
-    const q1DownloadValue = sortedDownload[q1Index];
+    const q1DownloadValue =
+      q1Index % 1 !== 0
+        ? (sortedDownload[Math.ceil(q1Index - 1)] +
+            sortedDownload[Math.floor(q1Index - 1)]) /
+          2
+        : sortedDownload[q1Index - 1];
 
     const sortedUpload = jsonData
       .map((entry) => Number(entry.upload))
       .sort((a, b) => a - b);
-    const q1UploadValue = sortedUpload[q1Index];
+    const q1UploadValue =
+      q1Index % 1 !== 0
+        ? (sortedUpload[Math.ceil(q1Index - 1)] +
+            sortedUpload[Math.floor(q1Index - 1)]) /
+          2
+        : sortedUpload[q1Index - 1];
 
     const sortedPing = jsonData
       .map((entry) => Number(entry.ping))
       .sort((a, b) => a - b);
-    const q1PingValue = sortedPing[q1Index];
+    const q1PingValue =
+      q1Index % 1 !== 0
+        ? (sortedPing[Math.ceil(q1Index - 1)] +
+            sortedPing[Math.floor(q1Index - 1)]) /
+          2
+        : sortedPing[q1Index - 1];
 
     const stat: ISpeedTestData = {
       id: `q1_${formattedDate}`,
