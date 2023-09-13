@@ -1,20 +1,17 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-// GET average data of current month
-export const getAverageDataOfCurrentMonth = async (
-  req: Request,
-  res: Response
-) => {
+// GET average data of a specific month
+export const getAverageDataOfMonth = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
+    const { monthNumber } = req.params;
     const currentYear = dayjs().year();
-    const currentMonth = dayjs().month() + 1;
 
-    const startDate = dayjs(`${currentYear}-${currentMonth}-01`, "YYYY-MM-DD");
+    const startDate = dayjs(`${currentYear}-${monthNumber}-01`, "YYYY-MM-DD");
     const endDate = startDate.endOf("month");
 
     const data = [];
@@ -56,10 +53,19 @@ export const getAverageDataOfCurrentMonth = async (
     const averagePing = totalPing / data.length;
 
     const stat: ISpeedTestData = {
-      id: `average_month_${currentMonth}`,
-      ping: String(averagePing.toFixed(2)),
-      download: String(averageDownload.toFixed(2)),
-      upload: String(averageUpload.toFixed(2)),
+      id: `average_month_${monthNumber}`,
+      ping:
+        String(averagePing.toFixed(2)) !== "NaN"
+          ? String(averagePing.toFixed(2))
+          : "-",
+      download:
+        String(averageDownload.toFixed(2)) !== "NaN"
+          ? String(averageDownload.toFixed(2))
+          : "-",
+      upload:
+        String(averageUpload.toFixed(2)) !== "NaN"
+          ? String(averageUpload.toFixed(2))
+          : "-",
     };
 
     res.status(200).json(stat);

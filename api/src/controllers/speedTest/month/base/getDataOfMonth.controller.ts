@@ -1,21 +1,18 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-// GET data of a specific week
-export const getDataOfWeek = async (req: Request, res: Response) => {
+// GET data of a specific month
+export const getDataOfMonth = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
-    const { weekNumber } = req.params;
-    const currentYear = dayjs().year();
+    const { monthNumber } = req.params;
+    const currentYear = dayjs().year(); // Année en cours
 
-    const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
-      .startOf("week")
-      .add(parseInt(weekNumber) - 1, "week")
-      .add(1, "day");
-    const endDate = startDate.endOf("week").add(1, "day");
+    const startDate = dayjs(`${currentYear}-${monthNumber}-01`, "YYYY-MM-DD");
+    const endDate = startDate.endOf("month");
 
     const data = [];
 

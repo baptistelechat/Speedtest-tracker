@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-// GET data of a specific month
-export const getDataOfMonth = async (req: Request, res: Response) => {
+// GET data of current month
+export const getDataOfCurrentMonth = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
-    const { monthNumber } = req.params;
     const currentYear = dayjs().year(); // Année en cours
+    const currentMonth = dayjs().month() + 1; // Mois en cours (de 0 à 11)
 
-    const startDate = dayjs(`${currentYear}-${monthNumber}-01`, "YYYY-MM-DD");
+    const startDate = dayjs(`${currentYear}-${currentMonth}-01`, "YYYY-MM-DD");
     const endDate = startDate.endOf("month");
 
     const data = [];

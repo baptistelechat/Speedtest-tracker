@@ -1,24 +1,21 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-dayjs.extend(weekOfYear);
-
-// GET data of current week
-export const getDataOfCurrentWeek = (req: Request, res: Response) => {
+// GET data of previous month
+export const getDataOfPreviousMonth = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
     const currentYear = dayjs().year();
-    const currentWeek = dayjs().week();
+    const currentMonth = dayjs().month() + 1;
 
-    const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
-      .startOf("week")
-      .add(currentWeek - 1, "week")
-      .add(1, "day");
-    const endDate = startDate.endOf("week").add(1, "day");
+    const startDate = dayjs(
+      `${currentYear}-${currentMonth}-01`,
+      "YYYY-MM-DD"
+    ).subtract(1, "month");
+    const endDate = startDate.endOf("month");
 
     const data = [];
 

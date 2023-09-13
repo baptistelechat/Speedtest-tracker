@@ -1,11 +1,15 @@
 import express from "express";
-import { getDataOfToday } from "../../controllers/speedTest/day/getDataOfToday.controller";
-import { getDataOfYesterday } from "../../controllers/speedTest/day/getDataOfYesterday.controller";
-import { getLastDataOfToday } from "../../controllers/speedTest/day/getLastDataOfToday.controller";
-import { getAverageDataOfToday } from "../../controllers/speedTest/day/getAverageDataOfToday.controller";
-import { getAverageOfYesterday } from "../../controllers/speedTest/day/getAverageOfYesterday.controller";
-import { getAverageDataOfDate } from "../../controllers/speedTest/day/getAverageDataOfDate.controller";
-import { getDataOfDate } from "../../controllers/speedTest/day/getDataOfDate.controller";
+
+import { getDataOfDate } from "../../controllers/speedTest/day/base/getDataOfDate.controller";
+import { getAverageDataOfDate } from "../../controllers/speedTest/day/average/getAverageDataOfDate.controller";
+import { getAverageDataOfToday } from "../../controllers/speedTest/day/average/getAverageDataOfToday.controller";
+import { getAverageDataOfYesterday } from "../../controllers/speedTest/day/average/getAverageDataOfYesterday.controller";
+import { getDataOfToday } from "../../controllers/speedTest/day/base/getDataOfToday.controller";
+import { getDataOfYesterday } from "../../controllers/speedTest/day/base/getDataOfYesterday.controller";
+import { getLastDataOfToday } from "../../controllers/speedTest/day/base/getLastDataOfToday.controller";
+import { getMaxDataOfToday } from "../../controllers/speedTest/day/max/getMaxDataOfToday.controller";
+import { getMaxDataOfYesterday } from "../../controllers/speedTest/day/max/getMaxDataOfYesterday.controller";
+import { getMaxDataOfDate } from "../../controllers/speedTest/day/max/getMAxDataOfDate.controller";
 
 const speedTestDayRouter = express.Router();
 
@@ -20,8 +24,14 @@ speedTestDayRouter.get("/:filename", getDataOfDate);
 // GET average data of today
 speedTestDayRouter.get("/today/average", getAverageDataOfToday);
 // GET average data of yesterday
-speedTestDayRouter.get("/yesterday/average", getAverageOfYesterday);
+speedTestDayRouter.get("/yesterday/average", getAverageDataOfYesterday);
 // GET average data of a specific date
 speedTestDayRouter.get("/:filename/average", getAverageDataOfDate);
+// GET max data of today
+speedTestDayRouter.get("/today/max", getMaxDataOfToday);
+// GET max data of yesterday
+speedTestDayRouter.get("/yesterday/max", getMaxDataOfYesterday);
+// GET max data of a specific date
+speedTestDayRouter.get("/:filename/max", getMaxDataOfDate);
 
 export default speedTestDayRouter;

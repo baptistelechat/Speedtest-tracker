@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-// GET average data of yesterday
-export const getAverageOfYesterday = async (req: Request, res: Response) => {
+// GET average data of today
+export const getAverageDataOfToday = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
-    const yesterday = dayjs().subtract(1, "day");
-    const formattedDate = yesterday.format("YYYYMMDD");
+    const today = dayjs();
+    const formattedDate = today.format("YYYYMMDD");
 
     const dataPath = APP_MODE?.includes("UNIX")
       ? `./data/${formattedDate}.json`
@@ -37,9 +37,18 @@ export const getAverageOfYesterday = async (req: Request, res: Response) => {
 
     const stat: ISpeedTestData = {
       id: `average_${formattedDate}`,
-      ping: String(averagePing.toFixed(2)),
-      download: String(averageDownload.toFixed(2)),
-      upload: String(averageUpload.toFixed(2)),
+      ping:
+        String(averagePing.toFixed(2)) !== "NaN"
+          ? String(averagePing.toFixed(2))
+          : "-",
+      download:
+        String(averageDownload.toFixed(2)) !== "NaN"
+          ? String(averageDownload.toFixed(2))
+          : "-",
+      upload:
+        String(averageUpload.toFixed(2)) !== "NaN"
+          ? String(averageUpload.toFixed(2))
+          : "-",
     };
 
     res.status(200).json(stat);

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
 // GET data of today
 export const getDataOfToday = async (req: Request, res: Response) => {

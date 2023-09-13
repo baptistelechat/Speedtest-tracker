@@ -1,22 +1,19 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-dayjs.extend(weekOfYear);
-
-// GET average data of previous week
-export const getAverageDataOfPreviousWeek = (req: Request, res: Response) => {
+// GET max data of a specific week
+export const getMaxDataOfWeek = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
+    const { weekNumber } = req.params;
     const currentYear = dayjs().year();
-    const currentWeek = dayjs().week();
 
     const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
       .startOf("week")
-      .add(currentWeek - 2, "week")
+      .add(parseInt(weekNumber) - 1, "week")
       .add(1, "day");
     const endDate = startDate.endOf("week").add(1, "day");
 
@@ -41,28 +38,30 @@ export const getAverageDataOfPreviousWeek = (req: Request, res: Response) => {
       }
     }
 
-    const totalDownload = data.reduce(
-      (acc: number, entry: any) => acc + Number(entry.download),
-      0
-    );
-    const totalUpload = data.reduce(
-      (acc: number, entry: any) => acc + Number(entry.upload),
-      0
-    );
-    const totalPing = data.reduce(
-      (acc: number, entry: any) => acc + Number(entry.ping),
-      0
-    );
+    let maxDownload = -Infinity;
+    let maxUpload = -Infinity;
+    let maxPing = -Infinity;
 
-    const averageDownload = totalDownload / data.length;
-    const averageUpload = totalUpload / data.length;
-    const averagePing = totalPing / data.length;
+    for (const entry of data) {
+      maxDownload = Math.max(maxDownload, Number(entry.download));
+      maxUpload = Math.max(maxUpload, Number(entry.upload));
+      maxPing = Math.max(maxPing, Number(entry.ping));
+    }
 
     const stat: ISpeedTestData = {
-      id: `average_week_${currentWeek}`,
-      ping: String(averagePing.toFixed(2)),
-      download: String(averageDownload.toFixed(2)),
-      upload: String(averageUpload.toFixed(2)),
+      id: `max_week_${weekNumber}`,
+      ping:
+        String(maxPing.toFixed(2)) !== "-Infinity"
+          ? String(maxPing.toFixed(2))
+          : "-",
+      download:
+        String(maxDownload.toFixed(2)) !== "-Infinity"
+          ? String(maxDownload.toFixed(2))
+          : "-",
+      upload:
+        String(maxUpload.toFixed(2)) !== "-Infinity"
+          ? String(maxUpload.toFixed(2))
+          : "-",
     };
 
     res.status(200).json(stat);

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
+import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-// GET average data of previous month
-export const getAverageOfPreviousMonth = async (
+// GET max data of previous month
+export const getMaxDataOfPreviousMonth = async (
   req: Request,
   res: Response
 ) => {
@@ -41,28 +41,30 @@ export const getAverageOfPreviousMonth = async (
       }
     }
 
-    const totalDownload = data.reduce(
-      (acc: number, entry: any) => acc + Number(entry.download),
-      0
-    );
-    const totalUpload = data.reduce(
-      (acc: number, entry: any) => acc + Number(entry.upload),
-      0
-    );
-    const totalPing = data.reduce(
-      (acc: number, entry: any) => acc + Number(entry.ping),
-      0
-    );
+    let maxDownload = -Infinity;
+    let maxUpload = -Infinity;
+    let maxPing = -Infinity;
 
-    const averageDownload = totalDownload / data.length;
-    const averageUpload = totalUpload / data.length;
-    const averagePing = totalPing / data.length;
+    for (const entry of data) {
+      maxDownload = Math.max(maxDownload, Number(entry.download));
+      maxUpload = Math.max(maxUpload, Number(entry.upload));
+      maxPing = Math.max(maxPing, Number(entry.ping));
+    }
 
     const stat: ISpeedTestData = {
-      id: `average_month_${currentMonth - 1}`,
-      ping: String(averagePing.toFixed(2)),
-      download: String(averageDownload.toFixed(2)),
-      upload: String(averageUpload.toFixed(2)),
+      id: `max_month_${currentMonth - 1}`,
+      ping:
+        String(maxPing.toFixed(2)) !== "-Infinity"
+          ? String(maxPing.toFixed(2))
+          : "-",
+      download:
+        String(maxDownload.toFixed(2)) !== "-Infinity"
+          ? String(maxDownload.toFixed(2))
+          : "-",
+      upload:
+        String(maxUpload.toFixed(2)) !== "-Infinity"
+          ? String(maxUpload.toFixed(2))
+          : "-",
     };
 
     res.status(200).json(stat);
