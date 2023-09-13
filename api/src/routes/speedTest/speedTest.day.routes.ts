@@ -9,7 +9,7 @@ import { getDataOfYesterday } from "../../controllers/speedTest/day/base/getData
 import { getLastDataOfToday } from "../../controllers/speedTest/day/base/getLastDataOfToday.controller";
 import { getMaxDataOfToday } from "../../controllers/speedTest/day/max/getMaxDataOfToday.controller";
 import { getMaxDataOfYesterday } from "../../controllers/speedTest/day/max/getMaxDataOfYesterday.controller";
-import { getMaxDataOfDate } from "../../controllers/speedTest/day/max/getMAxDataOfDate.controller";
+import { getMaxDataOfDate } from "../../controllers/speedTest/day/max/getMaxDataOfDate.controller";
 
 const speedTestDayRouter = express.Router();
 
