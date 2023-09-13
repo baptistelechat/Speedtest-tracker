@@ -13,6 +13,9 @@ import { getMaxDataOfDate } from "../../controllers/speedTest/day/max/getMaxData
 import { getMinDataOfDate } from "../../controllers/speedTest/day/min/getMinDataOfDate.controller";
 import { getMinDataOfToday } from "../../controllers/speedTest/day/min/getMinDataOfToday.controller";
 import { getMinDataOfYesterday } from "../../controllers/speedTest/day/min/getMinDataOfYesterday.controller";
+import { getQ1DataOfDate } from "../../controllers/speedTest/day/q1/getQ1DataOfDate.controller";
+import { getQ1DataOfToday } from "../../controllers/speedTest/day/q1/getQ1DataOfToday.controller";
+import { getQ1DataOfYesterday } from "../../controllers/speedTest/day/q1/getQ1DataOfYesterday.controller";
 
 const speedTestDayRouter = express.Router();
 
@@ -42,5 +45,11 @@ speedTestDayRouter.get("/today/min", getMinDataOfToday);
 speedTestDayRouter.get("/yesterday/min", getMinDataOfYesterday);
 // GET min data of a specific date
 speedTestDayRouter.get("/:filename/min", getMinDataOfDate);
+// GET Q1 data of today
+speedTestDayRouter.get("/today/q1", getQ1DataOfToday);
+// GET Q1 data of yesterday
+speedTestDayRouter.get("/yesterday/q1", getQ1DataOfYesterday);
+// GET Q1 data of a specific date
+speedTestDayRouter.get("/:filename/q1", getQ1DataOfDate);
 
 export default speedTestDayRouter;
