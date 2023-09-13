@@ -1,22 +1,19 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-dayjs.extend(weekOfYear);
-
-// GET data of previous week
-export const getDataOfPreviousWeek = (req: Request, res: Response) => {
+// GET average data of current week
+export const getAverageDataOfWeek = (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
+    const { weekNumber } = req.params;
     const currentYear = dayjs().year();
-    const currentWeek = dayjs().week();
 
     const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
       .startOf("week")
-      .add(currentWeek - 2, "week")
+      .add(parseInt(weekNumber) - 1, "week")
       .add(1, "day");
     const endDate = startDate.endOf("week").add(1, "day");
 
@@ -41,7 +38,31 @@ export const getDataOfPreviousWeek = (req: Request, res: Response) => {
       }
     }
 
-    res.status(200).json(data);
+    const totalDownload = data.reduce(
+      (acc: number, entry: any) => acc + Number(entry.download),
+      0
+    );
+    const totalUpload = data.reduce(
+      (acc: number, entry: any) => acc + Number(entry.upload),
+      0
+    );
+    const totalPing = data.reduce(
+      (acc: number, entry: any) => acc + Number(entry.ping),
+      0
+    );
+
+    const averageDownload = totalDownload / data.length;
+    const averageUpload = totalUpload / data.length;
+    const averagePing = totalPing / data.length;
+
+    const stat: ISpeedTestData = {
+      id: `average_week_${weekNumber}`,
+      ping: String(averagePing.toFixed(2)),
+      download: String(averageDownload.toFixed(2)),
+      upload: String(averageUpload.toFixed(2)),
+    };
+
+    res.status(200).json(stat);
   } catch (error: any) {
     res.status(500).json({
       error: `Erreur lors de la récupération des données - ${error.message}`,

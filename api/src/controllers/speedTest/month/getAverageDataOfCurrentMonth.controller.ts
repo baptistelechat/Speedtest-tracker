@@ -3,13 +3,16 @@ import fs from "fs";
 import dayjs from "dayjs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
-// GET data of current month
-export const getDataOfCurrentMonth = async (req: Request, res: Response) => {
+// GET average data of current month
+export const getAverageDataOfCurrentMonth = async (
+  req: Request,
+  res: Response
+) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
-    const currentYear = dayjs().year(); // Année en cours
-    const currentMonth = dayjs().month() + 1; // Mois en cours (de 0 à 11)
+    const currentYear = dayjs().year();
+    const currentMonth = dayjs().month() + 1;
 
     const startDate = dayjs(`${currentYear}-${currentMonth}-01`, "YYYY-MM-DD");
     const endDate = startDate.endOf("month");
@@ -35,7 +38,31 @@ export const getDataOfCurrentMonth = async (req: Request, res: Response) => {
       }
     }
 
-    res.status(200).json(data);
+    const totalDownload = data.reduce(
+      (acc: number, entry: any) => acc + Number(entry.download),
+      0
+    );
+    const totalUpload = data.reduce(
+      (acc: number, entry: any) => acc + Number(entry.upload),
+      0
+    );
+    const totalPing = data.reduce(
+      (acc: number, entry: any) => acc + Number(entry.ping),
+      0
+    );
+
+    const averageDownload = totalDownload / data.length;
+    const averageUpload = totalUpload / data.length;
+    const averagePing = totalPing / data.length;
+
+    const stat: ISpeedTestData = {
+      id: `average_month_${currentMonth}`,
+      ping: String(averagePing.toFixed(2)),
+      download: String(averageDownload.toFixed(2)),
+      upload: String(averageUpload.toFixed(2)),
+    };
+
+    res.status(200).json(stat);
   } catch (error: any) {
     res.status(500).json({
       error: `Erreur lors de la récupération des données - ${error.message}`,

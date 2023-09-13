@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { ISpeedTestData } from "../../../data/interface/ISpeedTestData";
 
 // GET data of a specific date
-export const getDataOfSpecificDate = async (req: Request, res: Response) => {
+export const getDataOfDate = async (req: Request, res: Response) => {
   const APP_MODE = process.env.APP_MODE;
 
   try {
@@ -18,7 +18,7 @@ export const getDataOfSpecificDate = async (req: Request, res: Response) => {
     const fileData = fs.readFileSync(dataPath, "utf-8");
     const jsonData: ISpeedTestData[] = JSON.parse(fileData);
 
-    res.json(jsonData);
+    res.status(200).json(jsonData);
   } catch (error: any) {
     res.status(500).json({
       error: `Erreur lors de la récupération des données - ${error.message}`,

@@ -1,5 +1,5 @@
 export interface ISpeedTestData {
-  timestamp: string;
+  timestamp?: string;
   id: string;
   ping: string;
   download: string;

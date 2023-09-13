@@ -38,7 +38,7 @@ export const getDataOfWeek = async (req: Request, res: Response) => {
       }
     }
 
-    res.json(data);
+    res.status(200).json(data);
   } catch (error: any) {
     res.status(500).json({
       error: `Erreur lors de la récupération des données - ${error.message}`,

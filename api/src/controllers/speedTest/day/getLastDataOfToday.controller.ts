@@ -19,7 +19,7 @@ export const getLastDataOfToday = async (req: Request, res: Response) => {
     const jsonData: ISpeedTestData[] = JSON.parse(fileData);
     const lastEntry = jsonData[jsonData.length - 1];
 
-    res.json(lastEntry);
+    res.status(200).json(lastEntry);
   } catch (error: any) {
     res.status(500).json({
       error: `Erreur lors de la récupération des données - ${error.message}`,
