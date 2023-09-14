@@ -18,6 +18,9 @@ import { getQ1DataOfPreviousMonth } from "../../controllers/speedTest/month/q1/g
 import { getQ3DataOfCurrentMonth } from "../../controllers/speedTest/month/q3/getQ3DataOfCurrentMonth.controller";
 import { getQ3DataOfMonth } from "../../controllers/speedTest/month/q3/getQ3DataOfMonth.controller";
 import { getQ3DataOfPreviousMonth } from "../../controllers/speedTest/month/q3/getQ3DataOfPreviousMonth.controller";
+import { getMedianDataOfCurrentMonth } from "../../controllers/speedTest/month/median/getMedianDataOfCurrentMonth.controller";
+import { getMedianDataOfMonth } from "../../controllers/speedTest/month/median/getMedianDataOfMonth.controller";
+import { getMedianDataOfPreviousMonth } from "../../controllers/speedTest/month/median/getMedianDataOfPreviousMonth.controller";
 
 const speedTestMonthRouter = express.Router();
 
@@ -57,5 +60,11 @@ speedTestMonthRouter.get("/current/q3", getQ3DataOfCurrentMonth);
 speedTestMonthRouter.get("/previous/q3", getQ3DataOfPreviousMonth);
 // GET Q3 data for a specific month
 speedTestMonthRouter.get("/:monthNumber/q3", getQ3DataOfMonth);
+// GET median data of current month
+speedTestMonthRouter.get("/current/median", getMedianDataOfCurrentMonth);
+// GET median data of previous month
+speedTestMonthRouter.get("/previous/median", getMedianDataOfPreviousMonth);
+// GET median data for a specific month
+speedTestMonthRouter.get("/:monthNumber/median", getMedianDataOfMonth);
 
 export default speedTestMonthRouter;

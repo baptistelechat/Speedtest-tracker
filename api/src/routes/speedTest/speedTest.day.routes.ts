@@ -19,6 +19,9 @@ import { getQ1DataOfYesterday } from "../../controllers/speedTest/day/q1/getQ1Da
 import { getQ3DataOfDate } from "../../controllers/speedTest/day/q3/getQ3DataOfDate.controller";
 import { getQ3DataOfToday } from "../../controllers/speedTest/day/q3/getQ3DataOfToday.controller";
 import { getQ3DataOfYesterday } from "../../controllers/speedTest/day/q3/getQ3DataOfYesterday.controller";
+import { getMedianDataOfToday } from "../../controllers/speedTest/day/median/getMedianDataOfToday.controller";
+import { getMedianDataOfYesterday } from "../../controllers/speedTest/day/median/getMedianDataOfYesterday.controller";
+import { getMedianDataOfDate } from "../../controllers/speedTest/day/median/getMedianDataOfDate.controller";
 
 const speedTestDayRouter = express.Router();
 
@@ -60,5 +63,11 @@ speedTestDayRouter.get("/today/q3", getQ3DataOfToday);
 speedTestDayRouter.get("/yesterday/q3", getQ3DataOfYesterday);
 // GET Q3 data of a specific date
 speedTestDayRouter.get("/:filename/q3", getQ3DataOfDate);
+// GET median data of today
+speedTestDayRouter.get("/today/median", getMedianDataOfToday);
+// GET median data of yesterday
+speedTestDayRouter.get("/yesterday/median", getMedianDataOfYesterday);
+// GET median data of a specific date
+speedTestDayRouter.get("/:filename/median", getMedianDataOfDate);
 
 export default speedTestDayRouter;

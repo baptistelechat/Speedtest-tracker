@@ -18,6 +18,9 @@ import { getQ1DataOfWeek } from "../../controllers/speedTest/week/q1/getQ1DataOf
 import { getQ3DataOfCurrentWeek } from "../../controllers/speedTest/week/q3/getQ3DataOfCurrentWeek.controller";
 import { getQ3DataOfPreviousWeek } from "../../controllers/speedTest/week/q3/getQ3DataOfPreviousWeek.controller";
 import { getQ3DataOfWeek } from "../../controllers/speedTest/week/q3/getQ3DataOfWeek.controller";
+import { getMedianDataOfCurrentWeek } from "../../controllers/speedTest/week/median/getMedianDataOfCurrentWeek.controller";
+import { getMedianDataOfPreviousWeek } from "../../controllers/speedTest/week/median/getMedianDataOfPreviousWeek.controller";
+import { getMedianDataOfWeek } from "../../controllers/speedTest/week/median/getMedianDataOfWeek.controller";
 
 const speedTestWeekRouter = express.Router();
 
@@ -57,5 +60,11 @@ speedTestWeekRouter.get("/current/q3", getQ3DataOfCurrentWeek);
 speedTestWeekRouter.get("/previous/q3", getQ3DataOfPreviousWeek);
 // GET Q3 data for a specific week
 speedTestWeekRouter.get("/:weekNumber/q3", getQ3DataOfWeek);
+// GET median data of current week
+speedTestWeekRouter.get("/current/median", getMedianDataOfCurrentWeek);
+// GET median data of previous week
+speedTestWeekRouter.get("/previous/median", getMedianDataOfPreviousWeek);
+// GET median data for a specific week
+speedTestWeekRouter.get("/:weekNumber/median", getMedianDataOfWeek);
 
 export default speedTestWeekRouter;
