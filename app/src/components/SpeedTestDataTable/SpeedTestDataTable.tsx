@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { openInNewTab } from "@/data/utils/openInNewTab";
 import { getIndexById } from "@/data/utils/getIndexById";
 import { ProgressIcon } from "@/data/utils/progressIcon";
+import { Skeleton } from "@ui/skeleton";
 
 interface ISpeedTestDataTableProps {
   itemPerPage: string;
@@ -39,7 +40,6 @@ const SpeedTestDataTable = ({
   const pageData = () => {
     const maxFullPage = Math.floor(data.length / Number(itemPerPage));
     setMaxPageIndex(maxFullPage + 1);
-    console.log(maxFullPage <= pageIndex);
 
     if (maxFullPage >= pageIndex) {
       return data
@@ -49,7 +49,6 @@ const SpeedTestDataTable = ({
         )
         .reverse();
     } else {
-      console.log(data.length - maxFullPage * Number(itemPerPage));
       return data
         .slice(0, data.length - maxFullPage * Number(itemPerPage))
         .reverse();
@@ -73,6 +72,17 @@ const SpeedTestDataTable = ({
     fetchData();
   }, []);
 
+  if (data.length === 0) {
+    return (
+      <div className="w-full flex flex-row justify-between">
+        <Skeleton className="w-1/6 h-4 rounded-full" />
+        <Skeleton className="w-1/6 h-4 rounded-full" />
+        <Skeleton className="w-1/6 h-4 rounded-full" />
+        <Skeleton className="w-1/6 h-4 rounded-full" />
+        <Skeleton className="w-1/6 h-4 rounded-full" />
+      </div>
+    );
+  }
   return (
     <Table>
       <TableHeader>

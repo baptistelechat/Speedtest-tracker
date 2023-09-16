@@ -1,5 +1,6 @@
 import { ISpeedTestData } from "@/data/interface/ISpeedTestData";
 import { Card, CardHeader, CardTitle, CardContent } from "@ui/card";
+import { Skeleton } from "@ui/skeleton";
 import { ArrowDownSquare, ArrowUpSquare, Gauge } from "lucide-react";
 
 interface IKeyDataItemProps {
@@ -27,7 +28,13 @@ const KeyDataItem = ({ title, values }: IKeyDataItemProps) => {
         </div>
       );
     }
-    return <p>Chargement...</p>;
+    return (
+      <div className="flex flex-col gap-3">
+        <Skeleton className="w-1/2 h-4 rounded-full" />
+        <Skeleton className="w-1/2 h-4 rounded-full" />
+        <Skeleton className="w-1/2 h-4 rounded-full" />
+      </div>
+    );
   };
 
   return (
