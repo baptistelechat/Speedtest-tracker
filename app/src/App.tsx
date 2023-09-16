@@ -1,23 +1,19 @@
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@ui/select";
+import Dashboard from "./components/Dashboard";
+import KeyDataContainer from "./components/KeyData/KeyDataContainer";
+import SpeedTestDataTableContainer from "./components/SpeedTestDataTable/SpeedTestDataTableContainer";
+import SpeedTestGraph from "./components/SpeedTestGraph";
 
 const App = () => {
   return (
-    <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Theme" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
-      </SelectContent>
-    </Select>
+    <Dashboard>
+      <div id="DashboardContent" className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-row gap-4">
+          <SpeedTestGraph />
+          <KeyDataContainer />
+        </div>
+        <SpeedTestDataTableContainer />
+      </div>
+    </Dashboard>
   );
 };
 
