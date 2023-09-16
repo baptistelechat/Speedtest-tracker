@@ -11,7 +11,7 @@ const Dashboard = ({ children }: PropsWithChildren) => {
   return (
     <Card className="m-6">
       <CardHeader>
-        <CardTitle>Dashboard</CardTitle>
+        <CardTitle>🚀 Dashboard</CardTitle>
         <CardDescription>
           Compte-rendu des données pour la période sélectionnée
         </CardDescription>

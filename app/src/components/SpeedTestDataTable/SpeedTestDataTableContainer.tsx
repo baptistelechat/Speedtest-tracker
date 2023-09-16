@@ -1,14 +1,40 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@ui/card";
 import SpeedTestDataTable from "./SpeedTestDataTable";
+import { useState } from "react";
+import SpeedTestDataTableControls from "./SpeedTestDataTableControls";
 
 const SpeedTestDataTableContainer = () => {
+  const [itemPerPage, setItemPerPage] = useState("10");
+  const [pageIndex, setPageIndex] = useState(1);
+  const [maxPageIndex, setMaxPageIndex] = useState(0);
+
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>SpeedTest Table</CardTitle>
+        <CardTitle className="flex justify-between">
+          Tableau de données
+          <SpeedTestDataTableControls
+            itemPerPage={itemPerPage}
+            setItemPerPage={setItemPerPage}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+            maxPageIndex={maxPageIndex}
+          />
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <SpeedTestDataTable />
+      <CardContent className="flex flex-col items-center gap-4">
+        <SpeedTestDataTable
+          itemPerPage={itemPerPage}
+          pageIndex={pageIndex}
+          setMaxPageIndex={setMaxPageIndex}
+        />
+        <SpeedTestDataTableControls
+          itemPerPage={itemPerPage}
+          setItemPerPage={setItemPerPage}
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          maxPageIndex={maxPageIndex}
+        />
       </CardContent>
     </Card>
   );

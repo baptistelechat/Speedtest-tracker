@@ -14,11 +14,11 @@ const KeyDataItem = ({ title, values }: IKeyDataItemProps) => {
         <div>
           <div className="flex flex-row gap-2">
             <ArrowDownSquare />
-            <p>{values.download} ms</p>
+            <p>{values.download} Mbps</p>
           </div>
           <div className="flex flex-row gap-2">
             <ArrowUpSquare />
-            <p>{values.upload} ms</p>
+            <p>{values.upload} Mbps</p>
           </div>
           <div className="flex flex-row gap-2">
             <Gauge />
