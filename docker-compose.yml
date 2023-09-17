@@ -26,4 +26,14 @@ services:
       - API_PORT=${API_PORT}
       - FRONTEND_URL_LOCAL=${FRONTEND_URL_LOCAL}
       - FRONTEND_URL_PUBLIC=${FRONTEND_URL_PUBLIC}
-      - VITE_API_URL=${VITE_API_URL}
+  speedtest_tracker_app:
+    build: ./app
+    container_name: speedtest_tracker_app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - speedtest_tracker_api
+    restart: always
+    environment:
+      - VITE_API_URL = ${VITE_API_URL}
+

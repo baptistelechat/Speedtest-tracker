@@ -10,5 +10,4 @@ export default defineConfig({
       "@ui": path.resolve(__dirname, "./src/components/ui"),
     },
   },
-  envDir: path.resolve(__dirname, "../"),
 });
