@@ -11,7 +11,7 @@ const App = () => {
           <SpeedTestGraph />
           <KeyDataContainer />
         </div>
-        <SpeedTestDataTableContainer />
+        <SpeedTestDataTableContainer/>
       </div>
     </Dashboard>
   );

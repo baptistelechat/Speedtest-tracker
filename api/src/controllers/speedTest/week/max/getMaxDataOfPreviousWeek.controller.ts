@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
+import isoWeek from "dayjs/plugin/isoWeek";
 import { ISpeedTestData } from "../../../../data/interface/ISpeedTestData";
 
-dayjs.extend(weekOfYear);
+dayjs.extend(isoWeek);
 
 // GET max data of previous week
 export const getMaxDataOfPreviousWeek = (req: Request, res: Response) => {
@@ -12,7 +12,7 @@ export const getMaxDataOfPreviousWeek = (req: Request, res: Response) => {
 
   try {
     const currentYear = dayjs().year();
-    const currentWeek = dayjs().week();
+    const currentWeek = dayjs().isoWeek();
 
     const startDate = dayjs(`${currentYear}-01-01`, "YYYY-MM-DD")
       .startOf("week")

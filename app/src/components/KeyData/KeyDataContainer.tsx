@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import KeyDataItem from "./KeyDataItem";
 import { IKeyData } from "@/data/interface/IKeyData";
+import { usePeriod } from "@/hooks/Period/usePeriod";
 
 const KeyDataContainer = () => {
   const VITE_API_URL = import.meta.env.VITE_API_URL;
-  const PERIOD = "today";
+  
+  const period = usePeriod();
 
   const initialKeyDataState: IKeyData = {
     Moyenne: "",
@@ -23,7 +25,7 @@ const KeyDataContainer = () => {
     const fetchData = async () => {
       try {
         const averageResponse = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}/average`
+          `${VITE_API_URL}/api/speedTest/${period}/average`
         );
         const averageResult = await averageResponse.json();
         setData((prevData) => ({
@@ -35,7 +37,7 @@ const KeyDataContainer = () => {
       }
       try {
         const averageResponse = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}/min`
+          `${VITE_API_URL}/api/speedTest/${period}/min`
         );
         const averageResult = await averageResponse.json();
         setData((prevData) => ({
@@ -47,7 +49,7 @@ const KeyDataContainer = () => {
       }
       try {
         const averageResponse = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}/max`
+          `${VITE_API_URL}/api/speedTest/${period}/max`
         );
         const averageResult = await averageResponse.json();
         setData((prevData) => ({
@@ -59,7 +61,7 @@ const KeyDataContainer = () => {
       }
       try {
         const averageResponse = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}/q1`
+          `${VITE_API_URL}/api/speedTest/${period}/q1`
         );
         const averageResult = await averageResponse.json();
         setData((prevData) => ({
@@ -71,7 +73,7 @@ const KeyDataContainer = () => {
       }
       try {
         const averageResponse = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}/median`
+          `${VITE_API_URL}/api/speedTest/${period}/median`
         );
         const averageResult = await averageResponse.json();
         setData((prevData) => ({
@@ -83,7 +85,7 @@ const KeyDataContainer = () => {
       }
       try {
         const averageResponse = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}/q3`
+          `${VITE_API_URL}/api/speedTest/${period}/q3`
         );
         const averageResult = await averageResponse.json();
         setData((prevData) => ({
@@ -96,7 +98,7 @@ const KeyDataContainer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [period]);
 
   return (
     <div className="w-1/2 h-full grid grid-cols-2 gap-4">

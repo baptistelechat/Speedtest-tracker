@@ -1,4 +1,6 @@
 import { translateOption } from "@/data/utils/translateOption";
+import { usePeriod } from "@/hooks/Period/usePeriod";
+import { useUpdatePeriod } from "@/hooks/Period/useUpdatePeriod";
 import {
   Select,
   SelectTrigger,
@@ -7,12 +9,10 @@ import {
   SelectItem,
 } from "@ui/select";
 
-interface IPeriodSelectProps {
-  period: string;
-  setPeriod: React.Dispatch<React.SetStateAction<string>>;
-}
+const PeriodSelect = () => {
+  const period = usePeriod();
+  const setPeriod = useUpdatePeriod();
 
-const PeriodSelect = ({ period, setPeriod }: IPeriodSelectProps) => {
   const options = [
     "day/today",
     "day/yesterday",

@@ -22,18 +22,19 @@ import { ProgressIcon } from "@/data/utils/progressIcon";
 import { Skeleton } from "@ui/skeleton";
 
 interface ISpeedTestDataTableProps {
+  period: string;
   itemPerPage: string;
   pageIndex: number;
   setMaxPageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SpeedTestDataTable = ({
+  period,
   itemPerPage,
   pageIndex,
   setMaxPageIndex,
 }: ISpeedTestDataTableProps) => {
   const VITE_API_URL = import.meta.env.VITE_API_URL;
-  const PERIOD = "today";
 
   const [data, setData] = useState<ISpeedTestData[]>([]);
 
@@ -60,7 +61,7 @@ const SpeedTestDataTable = ({
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${VITE_API_URL}/api/speedTest/day/${PERIOD}`
+          `${VITE_API_URL}/api/speedTest/${period}`
         );
         const result = await response.json();
         setData(result);
@@ -70,7 +71,7 @@ const SpeedTestDataTable = ({
     };
 
     fetchData();
-  }, []);
+  }, [period]);
 
   if (data.length === 0) {
     return (
