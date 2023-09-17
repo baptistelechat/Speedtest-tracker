@@ -8,7 +8,7 @@ import {
 import { PropsWithChildren } from "react";
 import PeriodSelect from "./PeriodSelect";
 import { usePeriod } from "@/hooks/Period/usePeriod";
-import { translateOption } from "@/data/utils/translateOption";
+import { getPeriodDescription } from "@/data/utils/getPeriodDescription";
 
 const Dashboard = ({ children }: PropsWithChildren) => {
   const period = usePeriod();
@@ -21,7 +21,7 @@ const Dashboard = ({ children }: PropsWithChildren) => {
           <PeriodSelect />
         </CardTitle>
         <CardDescription>
-          {`Compte-rendu pour la période "${translateOption(period)}"`}
+          Compte-rendu {getPeriodDescription(period)}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-row">{children}</CardContent>

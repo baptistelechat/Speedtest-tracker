@@ -1,16 +1,30 @@
 import { ISpeedTestData } from "@/data/interface/ISpeedTestData";
-import { Card, CardHeader, CardTitle, CardContent } from "@ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+} from "@ui/card";
 import { Skeleton } from "@ui/skeleton";
 import { ArrowDownSquare, ArrowUpSquare, Gauge } from "lucide-react";
 
 interface IKeyDataItemProps {
   title: string;
+  description: string;
   values: ISpeedTestData | string;
 }
 
-const KeyDataItem = ({ title, values }: IKeyDataItemProps) => {
+const KeyDataItem = ({ title, description, values }: IKeyDataItemProps) => {
   const speedTestData = () => {
     if (typeof values !== "string") {
+      if (
+        values.download === "-" &&
+        values.upload === "-" &&
+        values.ping === "-"
+      ) {
+        return <p className="text-red-300 italic">Données indisponibles</p>;
+      }
       return (
         <div>
           <div className="flex flex-row gap-2">
@@ -41,6 +55,9 @@ const KeyDataItem = ({ title, values }: IKeyDataItemProps) => {
     <Card className="w-full">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
+        <CardDescription>
+          {description}
+        </CardDescription>
       </CardHeader>
       <CardContent>{speedTestData()}</CardContent>
     </Card>

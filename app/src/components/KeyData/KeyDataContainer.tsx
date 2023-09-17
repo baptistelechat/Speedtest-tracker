@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import KeyDataItem from "./KeyDataItem";
 import { IKeyData } from "@/data/interface/IKeyData";
 import { usePeriod } from "@/hooks/Period/usePeriod";
+import { getPeriodDescription } from "@/data/utils/getPeriodDescription";
 
 const KeyDataContainer = () => {
   const VITE_API_URL = import.meta.env.VITE_API_URL;
-  
+
   const period = usePeriod();
 
   const initialKeyDataState: IKeyData = {
@@ -19,6 +20,25 @@ const KeyDataContainer = () => {
 
   const [data, setData] = useState(initialKeyDataState);
   const entries = Object.entries(data);
+
+  const getDescription = (title: string) => {
+    switch (title) {
+      case "Moyenne":
+        return `Valeurs moyennes ${getPeriodDescription(period)}`;
+      case "Minimum":
+        return `Valeurs minimales ${getPeriodDescription(period)}`;
+      case "Maximum":
+        return `Valeurs maximales ${getPeriodDescription(period)}`;
+      case "1er Quartile (Q1)":
+        return "25% des données sont inférieures à ...";
+      case "Médiane":
+        return "50% des données sont inférieures à ...";
+      case "3ème Quartile (Q3)":
+        return "75% des données sont inférieures à ...";
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     // Fonction pour récupérer les données via fetch
@@ -104,12 +124,22 @@ const KeyDataContainer = () => {
     <div className="w-1/2 h-full grid grid-cols-2 gap-4">
       <div className="grid gap-4">
         {entries.slice(0, 3).map(([title, value]) => (
-          <KeyDataItem key={title} title={title} values={value} />
+          <KeyDataItem
+            key={title}
+            title={title}
+            description={getDescription(title)}
+            values={value}
+          />
         ))}
       </div>
       <div className="grid gap-4">
         {entries.slice(3).map(([title, value]) => (
-          <KeyDataItem key={title} title={title} values={value} />
+          <KeyDataItem
+            key={title}
+            title={title}
+            description={getDescription(title)}
+            values={value}
+          />
         ))}
       </div>
     </div>

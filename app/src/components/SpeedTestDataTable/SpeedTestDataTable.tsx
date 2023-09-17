@@ -14,7 +14,7 @@ import {
   Gauge,
   Link,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { openInNewTab } from "@/data/utils/openInNewTab";
 import { getIndexById } from "@/data/utils/getIndexById";
@@ -22,6 +22,8 @@ import { ProgressIcon } from "@/data/utils/progressIcon";
 import { Skeleton } from "@ui/skeleton";
 
 interface ISpeedTestDataTableProps {
+  data: ISpeedTestData[];
+  setData: React.Dispatch<React.SetStateAction<ISpeedTestData[]>>;
   period: string;
   itemPerPage: string;
   pageIndex: number;
@@ -29,14 +31,14 @@ interface ISpeedTestDataTableProps {
 }
 
 const SpeedTestDataTable = ({
+  data,
+  setData,
   period,
   itemPerPage,
   pageIndex,
   setMaxPageIndex,
 }: ISpeedTestDataTableProps) => {
   const VITE_API_URL = import.meta.env.VITE_API_URL;
-
-  const [data, setData] = useState<ISpeedTestData[]>([]);
 
   const pageData = () => {
     const maxFullPage = Math.floor(data.length / Number(itemPerPage));
@@ -60,9 +62,7 @@ const SpeedTestDataTable = ({
     // Fonction pour récupérer les données via fetch
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${VITE_API_URL}/api/speedTest/${period}`
-        );
+        const response = await fetch(`${VITE_API_URL}/api/speedTest/${period}`);
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -84,6 +84,7 @@ const SpeedTestDataTable = ({
       </div>
     );
   }
+
   return (
     <Table>
       <TableHeader>
