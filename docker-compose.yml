@@ -30,10 +30,7 @@ services:
     build: ./app
     container_name: speedtest_tracker_app
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "${APP_PORT}:5173"
     depends_on:
       - speedtest_tracker_api
     restart: always
-    environment:
-      - VITE_API_URL = ${VITE_API_URL}
-
