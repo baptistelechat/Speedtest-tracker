@@ -70,7 +70,11 @@ const SpeedTestDataTable = ({
       }
     };
 
-    fetchData();
+    if (!period.includes("custom")) {
+      fetchData();
+    } else {
+      setData([]);
+    }
   }, [period]);
 
   if (data.length === 0) {

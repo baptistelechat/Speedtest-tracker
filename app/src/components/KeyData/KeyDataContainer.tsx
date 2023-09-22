@@ -117,7 +117,11 @@ const KeyDataContainer = () => {
       }
     };
 
-    fetchData();
+    if (!period.includes("custom")) {
+      fetchData();
+    } else {
+      setData(initialKeyDataState);
+    }
   }, [period]);
 
   return (
@@ -127,7 +131,9 @@ const KeyDataContainer = () => {
           <KeyDataItem
             key={title}
             title={title}
-            description={getDescription(title)}
+            description={
+              !period.includes("custom") ? getDescription(title) : ""
+            }
             values={value}
           />
         ))}
@@ -137,7 +143,9 @@ const KeyDataContainer = () => {
           <KeyDataItem
             key={title}
             title={title}
-            description={getDescription(title)}
+            description={
+              !period.includes("custom") ? getDescription(title) : ""
+            }
             values={value}
           />
         ))}

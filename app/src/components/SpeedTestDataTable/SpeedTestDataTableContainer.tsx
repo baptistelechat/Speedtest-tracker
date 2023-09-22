@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@ui/card";
 import SpeedTestDataTable from "./SpeedTestDataTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SpeedTestDataTableControls from "./SpeedTestDataTableControls";
 import { usePeriod } from "@/hooks/Period/usePeriod";
 import { ISpeedTestData } from "@/data/interface/ISpeedTestData";
@@ -12,6 +12,10 @@ const SpeedTestDataTableContainer = () => {
   const [maxPageIndex, setMaxPageIndex] = useState(0);
 
   const period = usePeriod();
+
+  useEffect(() => {
+    setPageIndex(1);
+  }, [period]);
 
   return (
     <Card className="w-full">

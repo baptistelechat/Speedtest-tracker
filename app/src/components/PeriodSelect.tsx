@@ -8,6 +8,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@ui/select";
+import CalendarDialog from "./CalendarDialog/CalendarDialog";
 
 const PeriodSelect = () => {
   const period = usePeriod();
@@ -25,11 +26,25 @@ const PeriodSelect = () => {
     "month/custom",
   ];
 
+  const handleValueChange = (option: string) => {
+    if (option.includes("custom")) {
+      const calendarDialogButtonTrigger = document.getElementById(
+        "CalendarDialogTrigger"
+      ) as HTMLButtonElement;
+      calendarDialogButtonTrigger.click();
+    }
+    setPeriod(option);
+  };
+
   return (
     <div className="flex gap-4">
       <div className="flex gap-2 items-center text-base font-normal">
+        <CalendarDialog />
         <p>Période sélectionnée :</p>
-        <Select onValueChange={setPeriod} defaultValue={period}>
+        <Select
+          onValueChange={(option: string) => handleValueChange(option)}
+          defaultValue={period}
+        >
           <SelectTrigger className="w-52 ">
             <SelectValue placeholder={period} />
           </SelectTrigger>
