@@ -10,12 +10,42 @@ const KeyDataContainer = () => {
   const period = usePeriod();
 
   const initialKeyDataState: IKeyData = {
-    Moyenne: "",
-    Minimum: "",
-    Maximum: "",
-    "1er Quartile (Q1)": "",
-    Médiane: "",
-    "3ème Quartile (Q3)": "",
+    Moyenne: {
+      id: "-",
+      download: "-",
+      upload: "-",
+      ping: "-",
+    },
+    Minimum: {
+      id: "-",
+      download: "-",
+      upload: "-",
+      ping: "-",
+    },
+    Maximum: {
+      id: "-",
+      download: "-",
+      upload: "-",
+      ping: "-",
+    },
+    "1er Quartile (Q1)": {
+      id: "-",
+      download: "-",
+      upload: "-",
+      ping: "-",
+    },
+    Médiane: {
+      id: "-",
+      download: "-",
+      upload: "-",
+      ping: "-",
+    },
+    "3ème Quartile (Q3)": {
+      id: "-",
+      download: "-",
+      upload: "-",
+      ping: "-",
+    },
   };
 
   const [data, setData] = useState(initialKeyDataState);
@@ -44,74 +74,147 @@ const KeyDataContainer = () => {
     // Fonction pour récupérer les données via fetch
     const fetchData = async () => {
       try {
-        const averageResponse = await fetch(
+        const response = await fetch(
           `${VITE_API_URL}/api/speedTest/${period}/average`
         );
-        const averageResult = await averageResponse.json();
-        setData((prevData) => ({
-          ...prevData,
-          Moyenne: averageResult,
-        }));
+        if (response.ok) {
+          const result = await response.json();
+          setData((prevData) => ({
+            ...prevData,
+            Moyenne: result,
+          }));
+        } else {
+          console.log("first");
+          setData((prevData) => ({
+            ...prevData,
+            Moyenne: {
+              id: "-",
+              download: "-",
+              upload: "-",
+              ping: "-",
+            },
+          }));
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
       try {
-        const averageResponse = await fetch(
+        const response = await fetch(
           `${VITE_API_URL}/api/speedTest/${period}/min`
         );
-        const averageResult = await averageResponse.json();
-        setData((prevData) => ({
-          ...prevData,
-          Minimum: averageResult,
-        }));
+        if (response.ok) {
+          const result = await response.json();
+          setData((prevData) => ({
+            ...prevData,
+            Minimum: result,
+          }));
+        } else {
+          setData((prevData) => ({
+            ...prevData,
+            Minimum: {
+              id: "-",
+              download: "-",
+              upload: "-",
+              ping: "-",
+            },
+          }));
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
       try {
-        const averageResponse = await fetch(
+        const response = await fetch(
           `${VITE_API_URL}/api/speedTest/${period}/max`
         );
-        const averageResult = await averageResponse.json();
-        setData((prevData) => ({
-          ...prevData,
-          Maximum: averageResult,
-        }));
+        if (response.ok) {
+          const result = await response.json();
+          setData((prevData) => ({
+            ...prevData,
+            Maximum: result,
+          }));
+        } else {
+          setData((prevData) => ({
+            ...prevData,
+            Maximum: {
+              id: "-",
+              download: "-",
+              upload: "-",
+              ping: "-",
+            },
+          }));
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
       try {
-        const averageResponse = await fetch(
+        const response = await fetch(
           `${VITE_API_URL}/api/speedTest/${period}/q1`
         );
-        const averageResult = await averageResponse.json();
-        setData((prevData) => ({
-          ...prevData,
-          "1er Quartile (Q1)": averageResult,
-        }));
+        if (response.ok) {
+          const result = await response.json();
+          setData((prevData) => ({
+            ...prevData,
+            "1er Quartile (Q1)": result,
+          }));
+        } else {
+          setData((prevData) => ({
+            ...prevData,
+            "1er Quartile (Q1)": {
+              id: "-",
+              download: "-",
+              upload: "-",
+              ping: "-",
+            },
+          }));
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
       try {
-        const averageResponse = await fetch(
+        const response = await fetch(
           `${VITE_API_URL}/api/speedTest/${period}/median`
         );
-        const averageResult = await averageResponse.json();
-        setData((prevData) => ({
-          ...prevData,
-          Médiane: averageResult,
-        }));
+        if (response.ok) {
+          const result = await response.json();
+          setData((prevData) => ({
+            ...prevData,
+            Médiane: result,
+          }));
+        } else {
+          setData((prevData) => ({
+            ...prevData,
+            Médiane: {
+              id: "-",
+              download: "-",
+              upload: "-",
+              ping: "-",
+            },
+          }));
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
       try {
-        const averageResponse = await fetch(
+        const response = await fetch(
           `${VITE_API_URL}/api/speedTest/${period}/q3`
         );
-        const averageResult = await averageResponse.json();
-        setData((prevData) => ({
-          ...prevData,
-          "3ème Quartile (Q3)": averageResult,
-        }));
+        if (response.ok) {
+          const result = await response.json();
+          setData((prevData) => ({
+            ...prevData,
+            "3ème Quartile (Q3)": result,
+          }));
+        } else {
+          setData((prevData) => ({
+            ...prevData,
+            "3ème Quartile (Q3)": {
+              id: "-",
+              download: "-",
+              upload: "-",
+              ping: "-",
+            },
+          }));
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }

@@ -63,8 +63,12 @@ const SpeedTestDataTable = ({
     const fetchData = async () => {
       try {
         const response = await fetch(`${VITE_API_URL}/api/speedTest/${period}`);
-        const result = await response.json();
-        setData(result);
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+        } else {
+          setData([]);
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
