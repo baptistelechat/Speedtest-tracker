@@ -3,15 +3,15 @@ import SpeedTestDataTable from "./SpeedTestDataTable";
 import { useEffect, useState } from "react";
 import SpeedTestDataTableControls from "./SpeedTestDataTableControls";
 import { usePeriod } from "@/hooks/Period/usePeriod";
-import { ISpeedTestData } from "@/data/interface/ISpeedTestData";
+import { useData } from "@/hooks/Data/useData";
 
 const SpeedTestDataTableContainer = () => {
-  const [data, setData] = useState<ISpeedTestData[]>([]);
   const [itemPerPage, setItemPerPage] = useState("10");
   const [pageIndex, setPageIndex] = useState(1);
   const [maxPageIndex, setMaxPageIndex] = useState(0);
 
   const period = usePeriod();
+  const data = useData()
 
   useEffect(() => {
     setPageIndex(1);
@@ -39,9 +39,6 @@ const SpeedTestDataTableContainer = () => {
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-4">
         <SpeedTestDataTable
-          data={data}
-          setData={setData}
-          period={period}
           itemPerPage={itemPerPage}
           pageIndex={pageIndex}
           setMaxPageIndex={setMaxPageIndex}

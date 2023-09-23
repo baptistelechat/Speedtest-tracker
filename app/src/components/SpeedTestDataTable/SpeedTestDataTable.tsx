@@ -1,4 +1,3 @@
-import { ISpeedTestData } from "@/data/interface/ISpeedTestData";
 import {
   Table,
   TableBody,
@@ -14,72 +13,46 @@ import {
   Gauge,
   Link,
 } from "lucide-react";
-import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { openInNewTab } from "@/data/utils/openInNewTab";
 import { getIndexById } from "@/data/utils/getIndexById";
 import { ProgressIcon } from "@/data/utils/progressIcon";
 import { Skeleton } from "@ui/skeleton";
+import { useData } from "@/hooks/Data/useData";
 
 interface ISpeedTestDataTableProps {
-  data: ISpeedTestData[];
-  setData: React.Dispatch<React.SetStateAction<ISpeedTestData[]>>;
-  period: string;
   itemPerPage: string;
   pageIndex: number;
   setMaxPageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SpeedTestDataTable = ({
-  data,
-  setData,
-  period,
   itemPerPage,
   pageIndex,
   setMaxPageIndex,
 }: ISpeedTestDataTableProps) => {
-  const VITE_API_URL = import.meta.env.VITE_API_URL;
+  const data = useData();
 
   const pageData = () => {
-    const maxFullPage = Math.floor(data.length / Number(itemPerPage));
-    setMaxPageIndex(maxFullPage + 1);
+    if (data.length > 0) {
+      const maxFullPage = Math.floor(data.length / Number(itemPerPage));
+      setMaxPageIndex(maxFullPage + 1);
 
-    if (maxFullPage >= pageIndex) {
-      return data
-        .slice(
-          data.length - Number(itemPerPage) * pageIndex,
-          data.length - Number(itemPerPage) * pageIndex + Number(itemPerPage)
-        )
-        .reverse();
-    } else {
-      return data
-        .slice(0, data.length - maxFullPage * Number(itemPerPage))
-        .reverse();
-    }
-  };
-
-  useEffect(() => {
-    // Fonction pour récupérer les données via fetch
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${VITE_API_URL}/api/speedTest/${period}`);
-        if (response.ok) {
-          const result = await response.json();
-          setData(result);
-        } else {
-          setData([]);
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
+      if (maxFullPage >= pageIndex) {
+        return data
+          .slice(
+            data.length - Number(itemPerPage) * pageIndex,
+            data.length - Number(itemPerPage) * pageIndex + Number(itemPerPage)
+          )
+          .reverse();
+      } else {
+        return data
+          .slice(0, data.length - maxFullPage * Number(itemPerPage))
+          .reverse();
       }
-    };
-
-    if (!period.includes("custom")) {
-      fetchData();
-    } else {
-      setData([]);
     }
-  }, [period]);
+    return [];
+  };
 
   if (data.length === 0) {
     return (

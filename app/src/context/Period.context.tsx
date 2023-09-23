@@ -5,16 +5,16 @@ export const PeriodUpdateContext = createContext<
   Dispatch<SetStateAction<string>>
 >(() => []);
 
-interface IRouterContextProps {
+interface IPeriodContextProps {
   children: React.ReactNode;
 }
 
-const PeriodProvider = (props: IRouterContextProps) => {
-  const [router, setRouter] = useState<string>("day/today");
+const PeriodProvider = (props: IPeriodContextProps) => {
+  const [period, setPeriod] = useState<string>("day/today");
 
   return (
-    <PeriodContext.Provider value={router}>
-      <PeriodUpdateContext.Provider value={setRouter}>
+    <PeriodContext.Provider value={period}>
+      <PeriodUpdateContext.Provider value={setPeriod}>
         {props.children}
       </PeriodUpdateContext.Provider>
     </PeriodContext.Provider>
