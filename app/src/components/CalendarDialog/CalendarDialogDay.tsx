@@ -4,9 +4,13 @@ import { Calendar } from "@ui/calendar";
 import { useUpdatePeriod } from "@/hooks/Period/useUpdatePeriod";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { disabledDays } from "@/data/utils/disabledDays";
+import { fr } from "date-fns/locale";
+import { isSameMonth } from "date-fns";
+import { CalendarCheck2, Pin } from "lucide-react";
 
 const CalendarDialogDay = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [month, setMonth] = useState<Date>(new Date());
 
   const setPeriod = useUpdatePeriod();
 
@@ -46,6 +50,10 @@ const CalendarDialogDay = () => {
     }
   };
 
+  const goToToday = () => {
+    setMonth(new Date());
+  };
+
   if (date === undefined) {
     return <></>;
   }
@@ -58,9 +66,12 @@ const CalendarDialogDay = () => {
           mode="single"
           fixedWeeks
           ISOWeek
+          locale={fr}
           disabled={disabledDays()}
           selected={date}
           onSelect={setDate}
+          month={month}
+          onMonthChange={setMonth}
           className="w-fit rounded-md border"
         />
         <p>
@@ -70,9 +81,17 @@ const CalendarDialogDay = () => {
             shortDateStyle: true,
           })}
         </p>
+        <Button
+          disabled={isSameMonth(new Date(), month)}
+          onClick={() => goToToday()}
+        >
+          <Pin className="mr-2 h-5 w-5" />
+          Aujourd'hui
+        </Button>
       </div>
       <div className="w-full flex justify-end">
         <Button className="w-fit" onClick={handleValidation}>
+          <CalendarCheck2 className="mr-2 h-5 w-5" />
           Valider
         </Button>
       </div>

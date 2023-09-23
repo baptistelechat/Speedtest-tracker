@@ -11,6 +11,7 @@ import { translateOption } from "@/data/utils/translateOption";
 import CalendarDialogDay from "./CalendarDialogDay";
 import CalendarDialogWeek from "./CalendarDialogWeek";
 import CalendarDialogMonth from "./CalendarDialogMonth";
+import { CalendarDays } from "lucide-react";
 
 const CalendarDialog = () => {
   const period = usePeriod();
@@ -47,7 +48,12 @@ const CalendarDialog = () => {
       <DialogTrigger id="CalendarDialogTrigger" />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{translateOption(period)}</DialogTitle>
+          <DialogTitle>
+            <div className="flex flex-row gap-2 items-center">
+              <CalendarDays className="h-6 w-6" />
+              {translateOption(period)}
+            </div>
+          </DialogTitle>
           <DialogDescription>{dialogDescription()}</DialogDescription>
           {CalendarPicker()}
         </DialogHeader>
