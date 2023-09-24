@@ -197,19 +197,19 @@ GET /api/speedTest/day/:filename/median
 ##### GET data of current week
 
 ```http
-GET api/speedTest/week/current
+GET /api/speedTest/week/current
 ```
 
 ##### GET data of previous week
 
 ```http
-GET api/speedTest/week/previous
+GET /api/speedTest/week/previous
 ```
 
 ##### GET data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber
+GET /api/speedTest/week/:weekNumber
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -221,19 +221,19 @@ GET api/speedTest/week/:weekNumber
 ##### GET average data of current week
 
 ```http
-GET api/speedTest/week/current/average
+GET /api/speedTest/week/current/average
 ```
 
 ##### GET average data of previous week
 
 ```http
-GET api/speedTest/week/previous/average
+GET /api/speedTest/week/previous/average
 ```
 
 ##### GET average data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber/average
+GET /api/speedTest/week/:weekNumber/average
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -245,19 +245,19 @@ GET api/speedTest/week/:weekNumber/average
 ##### GET max data of current week
 
 ```http
-GET api/speedTest/week/current/max
+GET /api/speedTest/week/current/max
 ```
 
 ##### GET max data of previous week
 
 ```http
-GET api/speedTest/week/previous/max
+GET /api/speedTest/week/previous/max
 ```
 
 ##### GET max data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber/max
+GET /api/speedTest/week/:weekNumber/max
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -269,19 +269,19 @@ GET api/speedTest/week/:weekNumber/max
 ##### GET min data of current week
 
 ```http
-GET api/speedTest/week/current/min
+GET /api/speedTest/week/current/min
 ```
 
 ##### GET min data of previous week
 
 ```http
-GET api/speedTest/week/previous/min
+GET /api/speedTest/week/previous/min
 ```
 
 ##### GET min data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber/min
+GET /api/speedTest/week/:weekNumber/min
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -293,19 +293,19 @@ GET api/speedTest/week/:weekNumber/min
 ##### GET Q1 data of current week
 
 ```http
-GET api/speedTest/week/current/q1
+GET /api/speedTest/week/current/q1
 ```
 
 ##### GET Q1 data of previous week
 
 ```http
-GET api/speedTest/week/previous/q1
+GET /api/speedTest/week/previous/q1
 ```
 
 ##### GET Q1 data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber/q1
+GET /api/speedTest/week/:weekNumber/q1
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -317,19 +317,19 @@ GET api/speedTest/week/:weekNumber/q1
 ##### GET Q3 data of current week
 
 ```http
-GET api/speedTest/week/current/q3
+GET /api/speedTest/week/current/q3
 ```
 
 ##### GET Q3 data of previous week
 
 ```http
-GET api/speedTest/week/previous/q3
+GET /api/speedTest/week/previous/q3
 ```
 
 ##### GET Q3 data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber/q3
+GET /api/speedTest/week/:weekNumber/q3
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -341,19 +341,19 @@ GET api/speedTest/week/:weekNumber/q3
 ##### GET median data of current week
 
 ```http
-GET api/speedTest/week/current/median
+GET /api/speedTest/week/current/median
 ```
 
 ##### GET median data of previous week
 
 ```http
-GET api/speedTest/week/previous/median
+GET /api/speedTest/week/previous/median
 ```
 
 ##### GET median data for a specific week
 
 ```http
-GET api/speedTest/week/:weekNumber/median
+GET /api/speedTest/week/:weekNumber/median
 ```
 
 | Parameter    | Type     | Description                                                             |
@@ -367,19 +367,19 @@ GET api/speedTest/week/:weekNumber/median
 ##### GET data for current month
 
 ```http
-GET api/speedTest/month/current
+GET /api/speedTest/month/current
 ```
 
 ##### GET data for previous month
 
 ```http
-GET api/speedTest/month/previous
+GET /api/speedTest/month/previous
 ```
 
 ##### GET data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber
+GET /api/speedTest/month/:monthNumber
 ```
 
 | Parameter     | Type     | Description                                                              |
@@ -391,19 +391,19 @@ GET api/speedTest/month/:monthNumber
 ##### GET average data of current month
 
 ```http
-GET api/speedTest/month/current/average
+GET /api/speedTest/month/current/average
 ```
 
 ##### GET average data of previous month
 
 ```http
-GET api/speedTest/month/previous/average
+GET /api/speedTest/month/previous/average
 ```
 
 ##### GET average data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber/average
+GET /api/speedTest/month/:monthNumber/average
 ```
 
 | Parameter     | Type     | Description                                                              |
@@ -415,19 +415,19 @@ GET api/speedTest/month/:monthNumber/average
 ##### GET max data of current month
 
 ```http
-GET api/speedTest/month/current/max
+GET /api/speedTest/month/current/max
 ```
 
 ##### GET max data of previous month
 
 ```http
-GET api/speedTest/month/previous/max
+GET /api/speedTest/month/previous/max
 ```
 
 ##### GET max data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber/max
+GET /api/speedTest/month/:monthNumber/max
 ```
 
 | Parameter     | Type     | Description                                                              |
@@ -439,19 +439,19 @@ GET api/speedTest/month/:monthNumber/max
 ##### GET min data of current month
 
 ```http
-GET api/speedTest/month/current/min
+GET /api/speedTest/month/current/min
 ```
 
 ##### GET min data of previous month
 
 ```http
-GET api/speedTest/month/previous/min
+GET /api/speedTest/month/previous/min
 ```
 
 ##### GET min data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber/min
+GET /api/speedTest/month/:monthNumber/min
 ```
 
 | Parameter     | Type     | Description                                                              |
@@ -463,19 +463,19 @@ GET api/speedTest/month/:monthNumber/min
 ##### GET Q1 data of current month
 
 ```http
-GET api/speedTest/month/current/q1
+GET /api/speedTest/month/current/q1
 ```
 
 ##### GET Q1 data of previous month
 
 ```http
-GET api/speedTest/month/previous/q1
+GET /api/speedTest/month/previous/q1
 ```
 
 ##### GET Q1 data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber/q1
+GET /api/speedTest/month/:monthNumber/q1
 ```
 
 | Parameter     | Type     | Description                                                              |
@@ -487,19 +487,19 @@ GET api/speedTest/month/:monthNumber/q1
 ##### GET Q3 data of current month
 
 ```http
-GET api/speedTest/month/current/q3
+GET /api/speedTest/month/current/q3
 ```
 
 ##### GET Q3 data of previous month
 
 ```http
-GET api/speedTest/month/previous/q3
+GET /api/speedTest/month/previous/q3
 ```
 
 ##### GET Q3 data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber/q3;
+GET /api/speedTest/month/:monthNumber/q3;
 ```
 
 | Parameter     | Type     | Description                                                              |
@@ -511,19 +511,19 @@ GET api/speedTest/month/:monthNumber/q3;
 ##### GET median data of current month
 
 ```http
-GET api/speedTest/month/current/median
+GET /api/speedTest/month/current/median
 ```
 
 ##### GET median data of previous month
 
 ```http
-GET api/speedTest/month/previous/median
+GET /api/speedTest/month/previous/median
 ```
 
 ##### GET median data for a specific month
 
 ```http
-GET api/speedTest/month/:monthNumber/median
+GET /api/speedTest/month/:monthNumber/median
 ```
 
 | Parameter     | Type     | Description                                                              |

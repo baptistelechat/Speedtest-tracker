@@ -111,7 +111,7 @@ Step 4 : open a browser and go to http://localhost:5000
 localhost:5000 (or other if you setup a different port in root .env)
 ```
 
-#### 🐳 Prerequisites (docker)
+### 🐳 Installing (Docker)
 
 Step 1: Copy .env.example to the project root, rename it .env and configure it as required
 
