@@ -29,8 +29,8 @@ const SpeedTestDataTablePagination = ({
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
-      <p>
-        Page {pageIndex}/{maxPageIndex}
+      <p className="flex gap-1">
+        <span className="hidden md:block">Page</span> {pageIndex}/{maxPageIndex}
       </p>
       <Button
         disabled={pageIndex === maxPageIndex}

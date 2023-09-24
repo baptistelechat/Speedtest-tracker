@@ -19,7 +19,7 @@ const SpeedTestDataTableSelect = ({
 
   return (
     <div className="flex gap-2 items-center text-base font-normal">
-      <p>Nombre de test par page :</p>
+      <p className="hidden md:block">Nombre de test par page :</p>
       <Select onValueChange={setItemPerPage} defaultValue={itemPerPage}>
         <SelectTrigger className="w-20 ">
           <SelectValue placeholder={itemPerPage} />

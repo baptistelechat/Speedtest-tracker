@@ -10,7 +10,11 @@ import {
 } from "@ui/select";
 import CalendarDialog from "./CalendarDialog/CalendarDialog";
 
-const PeriodSelect = () => {
+interface IPeriodSelectProps {
+  style?: string;
+}
+
+const PeriodSelect = ({ style }: IPeriodSelectProps) => {
   const period = usePeriod();
   const setPeriod = useUpdatePeriod();
 
@@ -38,14 +42,14 @@ const PeriodSelect = () => {
 
   return (
     <div className="flex gap-4">
-      <div className="flex gap-2 items-center text-base font-normal">
+      <div className={`${style} flex items-center text-base font-normal`}>
         <CalendarDialog />
-        <p>Période sélectionnée :</p>
+        <p className="hidden sm:block">Période sélectionnée :</p>
         <Select
           onValueChange={(option: string) => handleValueChange(option)}
           defaultValue={period}
         >
-          <SelectTrigger className="w-52 ">
+          <SelectTrigger className="w-52">
             <SelectValue placeholder={period} />
           </SelectTrigger>
           <SelectContent>

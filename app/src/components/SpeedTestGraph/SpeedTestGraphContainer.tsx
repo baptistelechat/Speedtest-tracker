@@ -11,8 +11,10 @@ import { useState } from "react";
 import SpeedTestGraphPing from "./SpeedTestGraphPing";
 import SpeedTestGraphUpload from "./SpeedTestGraphUpload";
 import SpeedTestGraphDownloadUpload from "./SpeedTestGraphDownloadUpload";
+import { useData } from "@/hooks/Data/useData";
 
 const SpeedTestGraphContainer = () => {
+  const data = useData();
   const [type, setType] = useState<
     "download" | "upload" | "ping" | "download / upload"
   >("download");
@@ -34,14 +36,26 @@ const SpeedTestGraphContainer = () => {
   };
 
   return (
-    <Card className="w-1/2 h-full">
+    <Card className="w-full xl:w-1/2 h-full">
       <CardHeader>
-        <CardTitle className="flex justify-between">
-          SpeedTest Graph <SpeedTestGraphSelect type={type} setType={setType} />
+        <CardTitle className="flex flex-row justify-between items-center gap-4">
+          SpeedTest Graph
+          <SpeedTestGraphSelect
+            type={type}
+            setType={setType}
+            style="hidden sm:flex"
+          />
         </CardTitle>
-        <CardDescription>
-          Visualisation des données pour la période en cours
+        <CardDescription className={data.length === 0 ? "text-red-300" : ""}>
+          {data.length === 0
+            ? "Données indisponibles"
+            : "Visualisation des données pour la période en cours"}
         </CardDescription>
+        <SpeedTestGraphSelect
+          type={type}
+          setType={setType}
+          style="flex sm:hidden"
+        />
       </CardHeader>
       <CardContent>{SpeedTestGraph()}</CardContent>
     </Card>

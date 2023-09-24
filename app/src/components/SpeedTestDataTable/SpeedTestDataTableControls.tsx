@@ -8,6 +8,7 @@ interface ISpeedTestDataTableControlsProps {
   pageIndex: number;
   setPageIndex: React.Dispatch<React.SetStateAction<number>>;
   maxPageIndex: number;
+  style?: string;
 }
 
 const SpeedTestDataTableControls = ({
@@ -16,9 +17,10 @@ const SpeedTestDataTableControls = ({
   pageIndex,
   setPageIndex,
   maxPageIndex,
+  style,
 }: ISpeedTestDataTableControlsProps) => {
   return (
-    <div className="flex gap-4">
+    <div className={`${style} flex gap-4`}>
       <SpeedTestDataTableSelect
         itemPerPage={itemPerPage}
         setItemPerPage={setItemPerPage}

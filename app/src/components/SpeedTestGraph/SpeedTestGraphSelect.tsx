@@ -17,11 +17,13 @@ type TOption = "download" | "upload" | "ping" | "download / upload";
 interface ISpeedTestGraphSelectProps {
   type: TOption;
   setType: React.Dispatch<React.SetStateAction<TOption>>;
+  style?: string;
 }
 
 const SpeedTestGraphSelect = ({
   type,
   setType,
+  style
 }: ISpeedTestGraphSelectProps) => {
   const options = ["download", "upload", "ping", "download / upload"];
 
@@ -47,7 +49,7 @@ const SpeedTestGraphSelect = ({
       ) => setType(option)}
       defaultValue={type}
     >
-      <SelectTrigger className="w-64 text-base font-normal">
+      <SelectTrigger className={`${style} w-56 text-base font-normal`}>
         <SelectValue placeholder={type} />
       </SelectTrigger>
       <SelectContent>

@@ -36,7 +36,7 @@ const KeyDataContainer = () => {
   };
 
   return (
-    <div className="w-1/2 h-full grid grid-cols-2 gap-4">
+    <div className="w-full xl:w-1/2 h-full grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div className="grid gap-4">
         {entries.slice(0, 3).map(([title, values]) => (
           <KeyDataItem

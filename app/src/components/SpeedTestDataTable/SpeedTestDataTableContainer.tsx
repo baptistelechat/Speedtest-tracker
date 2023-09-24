@@ -29,6 +29,7 @@ const SpeedTestDataTableContainer = () => {
               pageIndex={pageIndex}
               setPageIndex={setPageIndex}
               maxPageIndex={maxPageIndex}
+              style="hidden sm:flex"
             />
           ) : (
             <p className="text-red-300 italic font-normal text-base">

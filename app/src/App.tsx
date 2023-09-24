@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Dashboard>
       <div id="DashboardContent" className="w-full flex flex-col gap-4">
-        <div className="w-full flex flex-row gap-4">
+        <div className="w-full flex flex-col xl:flex-row gap-4">
           <SpeedTestGraphContainer />
           <KeyDataContainer />
         </div>
