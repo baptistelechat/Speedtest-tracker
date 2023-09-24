@@ -29,7 +29,7 @@ const speedTestDayRouter = express.Router();
 speedTestDayRouter.get("/today", getDataOfToday);
 // GET last data of today
 speedTestDayRouter.get("/last", getLastDataOfToday);
-// GET all // GET data of yesterday
+// GET data of yesterday
 speedTestDayRouter.get("/yesterday", getDataOfYesterday);
 // GET data of a specific date
 speedTestDayRouter.get("/:filename", getDataOfDate);

@@ -48,11 +48,11 @@ speedTestWeekRouter.get("/current/min", getMinDataOfCurrentWeek);
 speedTestWeekRouter.get("/previous/min", getMinDataOfPreviousWeek);
 // GET min data for a specific week
 speedTestWeekRouter.get("/:weekNumber/min", getMinDataOfWeek);
-// GET Q3 data of current week
+// GET Q1 data of current week
 speedTestWeekRouter.get("/current/q1", getQ1DataOfCurrentWeek);
-// GET Q3 data of previous week
+// GET Q1 data of previous week
 speedTestWeekRouter.get("/previous/q1", getQ1DataOfPreviousWeek);
-// GET Q3 data for a specific week
+// GET Q1 data for a specific week
 speedTestWeekRouter.get("/:weekNumber/q1", getQ1DataOfWeek);
 // GET Q3 data of current week
 speedTestWeekRouter.get("/current/q3", getQ3DataOfCurrentWeek);
