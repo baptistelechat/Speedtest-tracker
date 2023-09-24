@@ -2,9 +2,9 @@
 
 A full-stack web application for monitoring internet speed test data, including a Node.js backend with an API for data retrieval and a script with a CRON task to generate a JSON file periodically. A React frontend is available for visualization of key metrics.
 
-[📅 Day](https://github.com/baptistelechat/Speedtest-tracker/tree/main/api#-Day)
-[📅 Week](https://github.com/baptistelechat/Speedtest-tracker/tree/main/api#-Week)
-[📅 Month](https://github.com/baptistelechat/Speedtest-tracker/tree/main/api#-Month)
+[📅 Day](https://github.com/baptistelechat/Speedtest-tracker/tree/main/api#-day)
+[📅 Week](https://github.com/baptistelechat/Speedtest-tracker/tree/main/api#-week)
+[📅 Month](https://github.com/baptistelechat/Speedtest-tracker/tree/main/api#-month)
 
 ## 📸 Project's Screenshots
 
