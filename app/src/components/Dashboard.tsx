@@ -9,6 +9,7 @@ import { PropsWithChildren } from "react";
 import PeriodSelect from "./PeriodSelect";
 import { usePeriod } from "@/hooks/Period/usePeriod";
 import { getPeriodDescription } from "@/data/utils/getPeriodDescription";
+import { ModeToggle } from "./theme/mode-toggle";
 
 const Dashboard = ({ children }: PropsWithChildren) => {
   const period = usePeriod();
@@ -18,7 +19,10 @@ const Dashboard = ({ children }: PropsWithChildren) => {
       <CardHeader>
         <CardTitle className="flex flex-row justify-between items-center">
           🚀 Dashboard
-          <PeriodSelect style="hidden sm:flex sm:gap-2" />
+          <div className="flex gap-2">
+            <PeriodSelect style="hidden sm:flex sm:gap-2" />
+            <ModeToggle />
+          </div>
         </CardTitle>
         <CardDescription>
           Compte-rendu {getPeriodDescription(period)}
