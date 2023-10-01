@@ -10,6 +10,7 @@ import PeriodSelect from "./PeriodSelect";
 import { usePeriod } from "@/hooks/Period/usePeriod";
 import { getPeriodDescription } from "@/data/utils/getPeriodDescription";
 import { ModeToggle } from "./theme/mode-toggle";
+import LastSpeedTestToast from "./LastSpeedTestToast";
 
 const Dashboard = ({ children }: PropsWithChildren) => {
   const period = usePeriod();
@@ -21,6 +22,7 @@ const Dashboard = ({ children }: PropsWithChildren) => {
           🚀 Dashboard
           <div className="flex gap-2">
             <PeriodSelect style="hidden sm:flex sm:gap-2" />
+            <LastSpeedTestToast />
             <ModeToggle />
           </div>
         </CardTitle>

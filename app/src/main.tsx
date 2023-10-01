@@ -6,6 +6,7 @@ import PeriodProvider from "./context/Period.context.tsx";
 import DataProvider from "./context/Data.context.tsx";
 import KeyDataProvider from "./context/KeyData.context.tsx";
 import { ThemeProvider } from "./components/theme/theme-provider.tsx";
+import { Toaster } from "./components/ui/toaster.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <DataProvider>
           <KeyDataProvider>
             <App />
+            <Toaster />
           </KeyDataProvider>
         </DataProvider>
       </PeriodProvider>
